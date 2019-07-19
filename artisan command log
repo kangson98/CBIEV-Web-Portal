@@ -1,0 +1,21 @@
+php artisan make:model ProjectCategory -m -c
+php artisan make:model CenterFaculty -m -c
+php artisan make:model Programme -m -c
+php artisan make:model CBEIVStaff -m -c
+php artisan make:model DeanHead -m -c
+php artisan make:model ProjectSupervisor -m -c
+php artisan make:model ProjectMember -m -c
+php artisan make:model ProjectRegistration -m -c
+php artisan make:model ProjectRegistrationChangeLog -m -c
+php artisan make:model ProjectRegistrationSupervisorList -p -m -c
+php artisan make:model ProjectRegistrationMemberList -p -m -c
+php artisan make:model ProjectRegistrationStatusTracking -m -c
+php artisan make:model PRSupervisorRecommendation -m -c
+php artisan make:model PRDeanHeadRecommendation -m -c
+php artisan make:model PRManagerRecommendation -m -c
+php artisan make:model PRDirectorApproval -m -c
+php artisan make:model PRSupervisorRecommendationLog -m -c
+php artisan make:model PRDeanHeadRecommendationLog -m -c
+php artisan make:model PRManagerRecommendationLog -m -c
+php artisan make:model PRDirectorApprovalLog -m -c
+php artisan make:model iSparkProject -m -c

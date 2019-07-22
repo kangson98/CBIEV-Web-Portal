@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class MRDirectorApproval extends Model
 {
     /**
      * Table name for this model
      */
-    protected $table = 'addresses';
+    protected $table = 'mr_director_approvals';
 
     /**
     * The primary key associated with the model.
@@ -17,6 +17,7 @@ class Address extends Model
     * @var string
     */
     protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,46 +53,28 @@ class Address extends Model
      */
     protected $attributes = [];
 
-    // Model Relationship Function
-    /**
-     * Get addrress associate with the address list
-     * 
-     */
-    public static function investorRegistrationAddressList()
+    // Model Relation Function
+    /** 
+     * Get
+    */
+    public function director()
     {
-        return $this->hasOne('App\InvestorRegistrationAddressList', 'address_id');
+        return $this->belongsTo('App\CBIEVStaff', 'recommended_by');
     }
-    // Model Function
+
     /**
-     * Create and save new address
      * 
-     * @param String $line1
-     * @param String $line2
-     * @param String $city
-     * @param String $zip
-     * @param String $state
-     * 
-     * @return Address
      */
-    public static function createNewAddress(
-        $line1,
-        $line2,
-        $city,
-        $zip,
-        $state
-    )
+    public function statusTracking()
     {
-        return Address::create([
-            'line_1' => $line1,
-            'line_2' =>$line2,
-            'city' => $city,
-            'zip' => $zip,
-            'state' => $state
-        ]);
-    } 
+        return $this->belongsTo('App\MentorRegistrationStatusTracking', 'status_tracking_id');
+    }
 
-
-
-    
-
+    /**
+     * 
+     */
+    public function directorApprovalLog()
+    {
+        return $this->hasMany('App\MRDirectorApprovalLog', 'director_app_id');
+    }
 }

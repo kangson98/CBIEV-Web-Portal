@@ -88,7 +88,7 @@
                                                 Recommended
                                             @endif
                                             @break
-                                        @case(5)
+                                        @case(3)
                                             Auto Approved
                                         @break
                                     @endswitch
@@ -116,7 +116,7 @@
                                             @elseif ($deanHeadRec-> is_recommended === 0  && $deanHeadRec-> is_completed === 2)
                                                 Not Recommended
                                             @endif
-                                        @case(5)
+                                        @case(3)
                                             Auto Approved
                                         @break
                                     @endswitch
@@ -143,7 +143,7 @@
                                             @elseif ($managerRec-> is_recommended === 0  && $managerRec-> is_completed === 2)
                                                 Not Recommended
                                             @endif
-                                        @case(5)
+                                        @case(3)
                                             Auto Approved
                                         @break
                                     @endswitch

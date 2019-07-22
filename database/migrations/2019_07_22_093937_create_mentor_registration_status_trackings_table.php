@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAddressesTable extends Migration
+class CreateMentorRegistrationStatusTrackingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        Schema::create('mr_status_trackings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('line_1');
-            $table->string('line_2');
-            $table->string('city');
-            $table->string('zip');
-            $table->string('state');
+            $table->unsignedBigInteger('mentor_regis_id');
+            $table->foreign('mentor_regis_id')->references('id')->on('mentor_registrations');
+            $table->unsignedTinyInteger('mentor_registration_status');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('mr_status_trackings');
     }
 }

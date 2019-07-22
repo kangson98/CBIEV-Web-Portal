@@ -20,6 +20,8 @@ class CreateInvestorAddressListTable extends Migration
             // $table->unsignedBigInteger('address_id');
             // $table->foreign('address_id')->references('id')->on('addresses');
             // $table->unsignedTinyInteger('addressType');// 1 for registered address, 2 for business address
+            // $table->unsignedTinyInteger('type');// 1 for registered address, 2 for business address
+            // $table->unsignedTinyInteger('is-active');
             // $table->timestamps();
         });
     }

@@ -15,6 +15,10 @@ class CreateInvestorRegistrationContactPeopleTable extends Migration
     {
         Schema::create('investor_registration_contact_people', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('investor_regis_id');            
+            $table->foreign('investor_regis_id')->references('id')->on('investor_registrations');
+            $table->string('contact_person_name');
+            $table->string('contact_person_position');
             $table->timestamps();
         });
     }

@@ -57,7 +57,12 @@ Route::prefix('staff')->group(function(){
 
     Route::prefix('registration')->group(function(){
         Route::prefix('project')->group(function(){
-            Route::get('list', 'Registration\StaffProjectRegistrationController@showProjectRegistrationList')->name('project.registration.list');
+            Route::get('/', 'Registration\StaffProjectRegistrationController@showProjectRegistrationList')->name('project.registration.list');
+            Route::get('{id}', 'Registration\StaffProjectRegistrationController@showProjectRegistrationDetail')->name('project.registration.detail');
+            Route::post('start/approval/{id}/{stage}','ProjectRegistrationStatusTrackingController@startApprovalProcess')->name('project.regisration.approval.start');
+        });
+        Route::prefix('mentor')->group(function(){
+            Route::get('/', 'Registration\StaffProjectRegistrationController@showProjectRegistrationList')->name('project.registration.list');
             Route::get('{id}', 'Registration\StaffProjectRegistrationController@showProjectRegistrationDetail')->name('project.registration.detail');
             Route::post('start/approval/{id}/{stage}','ProjectRegistrationStatusTrackingController@startApprovalProcess')->name('project.regisration.approval.start');
         });

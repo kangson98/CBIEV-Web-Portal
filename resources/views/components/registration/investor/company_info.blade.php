@@ -2,15 +2,15 @@
         <div class="m-3"><strong>Company Information</strong></div>
 </div>
 <div class="form-group row">
-    <label for="companyName" class="col-sm-3 col-form-label">Registered Company Name</label>
+    <label for="companyRegisteredName" class="col-sm-3 col-form-label">Registered Company Name</label>
     <div class="col-sm-9">
-        <input type="text" name="companyName" id="companyName" class="form-control">
+        <input type="text" name="companyRegisteredName" id="companyRegisteredName" class="form-control">
     </div>
 </div>
 <div class="form-group row">
-    <label for="mentorCompanyName" class="col-sm-3 col-form-label">Company Registration No</label>
+    <label for="companyBusinessRegNo" class="col-sm-3 col-form-label">Company Registration No</label>
     <div class="col-sm-9">
-        <input type="text" name="companyRegNo" id="companyRegNo" class="form-control">
+        <input type="text" name="companyBusinessRegNo" id="companyBusinessRegNo" class="form-control">
     </div>
 </div>
 <div class="form-group row">
@@ -22,7 +22,7 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="companyBusinessAddress" class="col-sm-3 col-form-label">Business Address</label>
+    <label for="sameAddress" class="col-sm-3 col-form-label">Business Address</label>
     <div class="col-sm-9">
         <div class="form-group">
             <input class="form-check-input" type="checkbox" name="sameAddress" id="sameAddress">

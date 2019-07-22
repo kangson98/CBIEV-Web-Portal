@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class MentorRegistrationStatusTracking extends Model
 {
     /**
      * Table name for this model
      */
-    protected $table = 'addresses';
+    protected $table = 'mr_status_trackings';
 
     /**
     * The primary key associated with the model.
@@ -53,45 +53,29 @@ class Address extends Model
     protected $attributes = [];
 
     // Model Relationship Function
-    /**
-     * Get addrress associate with the address list
-     * 
-     */
-    public static function investorRegistrationAddressList()
+    public function mentorRegistration()
     {
-        return $this->hasOne('App\InvestorRegistrationAddressList', 'address_id');
+        return $this-> belongsTo('App\MentorRegistration', 'mentor_regis_id');
     }
-    // Model Function
     /**
-     * Create and save new address
      * 
-     * @param String $line1
-     * @param String $line2
-     * @param String $city
-     * @param String $zip
-     * @param String $state
-     * 
-     * @return Address
      */
-    public static function createNewAddress(
-        $line1,
-        $line2,
-        $city,
-        $zip,
-        $state
-    )
+    public function managerRecommendation()
     {
-        return Address::create([
-            'line_1' => $line1,
-            'line_2' =>$line2,
-            'city' => $city,
-            'zip' => $zip,
-            'state' => $state
-        ]);
-    } 
-
-
-
-    
-
+        return $this-> hasMany('App\MRManagerRecommendation', 'status_tracking_id');
+    }
+    /**
+     * 
+     */
+    public function directorApproval()
+    {
+        return $this-> hasMany('App\MRdirectorApproval', 'status_tracking_id');
+    }
+    /**
+     * 
+     */
+    public function deanHeadRecommendation()
+    {
+        return $this-> hasMany('App\MRDeanHeadRecommendation', 'status_tracking_id');
+    }
 }

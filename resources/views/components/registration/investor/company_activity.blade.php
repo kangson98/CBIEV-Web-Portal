@@ -14,8 +14,8 @@
     </div>
 </div>
 <div class="form-row mb-1">
-    <label for="mentorExpText">State  the type of activities your company is interested to invest/explore<span style="color:red"> *</span></label>
-    <textarea class="form-control" id="mentorExpText" name="mentorExpText" cols="30" rows="5" value="">{{ old('mentorExpText')}}</textarea>
+    <label for="companyAreaOfInterest">State  the type of activities your company is interested to invest/explore<span style="color:red"> *</span></label>
+    <textarea class="form-control" id="companyAreaOfInterest" name="companyAreaOfInterest" cols="30" rows="5" value="">{{ old('companyAreaOfInterest')}}</textarea>
     <span class="focus-border"></span>
 </div>
 <div class="form-group row">

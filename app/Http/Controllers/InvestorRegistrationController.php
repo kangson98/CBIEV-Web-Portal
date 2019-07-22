@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\InvestorRegistration;
+use App\Address;
+use App\InvestorRegistrationContactPerson;
+use App\InvestorRegistrationContact;
+use App\InvestorRegistrationAddressList;
 
 class InvestorRegistrationController extends Controller
 {
@@ -24,15 +28,67 @@ class InvestorRegistrationController extends Controller
      */
     public function saveRegistration(Request $request)
     {
-        return dd($request);
         // validate
 
         // save investor registration
-        InvestorRegistration::saveNewInvestorRegistration();
-        // save investor registration address
+        $investorRegistration = InvestorRegistration::createNewInvestorRegistration(
+            $request-> companyRegisteredName, 
+            $request-> companyBusinessRegNo, 
+            $request-> companyPaidUpCap, 
+            $request-> companyWebsite, 
+            $request-> companyBusinessClassification,
+            $request-> companyBusinessDesc,
+            $request-> companyAreaOfInterest,
+            $request-> companyAttendSession,
+        );
 
-        // attact address to investor registration
+        $investorRegistrationID = $investorRegistration-> id;
+        // save and attach address to investor registration
+        $registeredAddress = Address::createNewAddress(
+            $request-> registerAddressLine1,
+            $request-> registerAddressLine2,
+            $request-> registerAddressCity,
+            $request-> registerAddressZip,
+            $request-> registerAddressState
+        );
+        InvestorRegistrationAddressList::newRegisteredAddress($investorRegistrationID, $registeredAddress-> id);
+
+        if (!($request-> has('sameAddress')) && $request-> sameAddress != "on") {
+            $businessAddress = Address::createNewAddress(
+                $request-> businessAddressLine1,
+                $request-> businessAddressLine2,
+                $request-> businessAddressCity,
+                $request-> businessAddressZip,
+                $request-> businessAddressState
+            );
+            InvestorRegistrationAddressList::newBusinessAddress($investorRegistrationID, $businessAddress-> id);
+        }else{
+            InvestorRegistrationAddressList::newBusinessAddress($investorRegistrationID, $registeredAddress-> id);
+        }
+
+        // save investor contact person
+        InvestorRegistrationContactPerson::createNewContactPerson($investorRegistrationID, $request-> companyContactPersonName, $request-> companyContactPersonPosition);
+
+        // save investor contact
+        $companyHP = $request-> companyHP;
+        if (isset($companyHP) == true && !($companyHP === '')) {
+            InvestorRegistrationContact::newHPContact($investorRegistrationID, $companyHP);
+        }
+        $companyTel = $request-> companyTel;
+        if (isset($request-> companyTel) == true && !($request-> companyTel === '')) {
+            InvestorRegistrationContact::newTelContact($investorRegistrationID, $companyTel);
+        }
+        $companyEmail = $request-> companyEmail;
+        if (isset($request-> companyEmail) == true && !($request-> companyEmail === '')) {
+            InvestorRegistrationContact::newEmailContact($investorRegistrationID, $companyEmail);
+        }
+        $companyFax = $request-> companyFax;
+        if (isset($request-> companyFax) == true && !($request-> companyFax === '')) {
+            InvestorRegistrationContact::newFaxContact($investorRegistrationID, $companyFax);
+        }
 
         // redirect 
+
+        return ('success, investor');
     }
 }

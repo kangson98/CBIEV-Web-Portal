@@ -60,7 +60,7 @@ class InvestorRegistrationAddressList extends Pivot
      */
     public function investorRegistration()
     {
-        return $this->hasMany('App\InvestorRegistration','investor_regis_id');
+        return $this->belongsTo('App\InvestorRegistration','investor_regis_id');
     }
 
     /**
@@ -72,4 +72,30 @@ class InvestorRegistrationAddressList extends Pivot
         return $this->belongsTo('App\Address', 'address_id');
     }
     // Model Function
+    /**
+     * Create and save new investor registration address list
+     */
+    public static function createNewAddressList($investorRegisID, $addressID, $addressType)
+    {
+        return InvestorRegistrationAddressList::create([
+            'investor_regis_id' => $investorRegisID,
+            'address_id' => $addressID,
+            'address_type' => $addressType
+        ]);
+    }
+
+    /**
+     * Create new address list for registered address
+     */
+    public static function newRegisteredAddress($investorRegisID, $addressID)
+    {
+        self::createNewAddressList($investorRegisID, $addressID, 1);
+    }
+    /**
+     * Create new address list for business address
+     */
+    public static function newBusinessAddress($investorRegisID, $addressID)
+    {
+        self::createNewAddressList($investorRegisID, $addressID, 2);
+    }
 }

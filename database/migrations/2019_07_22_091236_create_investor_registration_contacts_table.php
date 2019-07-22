@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvestorRegistrationAddressListTable extends Migration
+class CreateInvestorRegistrationContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateInvestorRegistrationAddressListTable extends Migration
      */
     public function up()
     {
-        Schema::create('investor_registration_address_list', function (Blueprint $table) {
+        Schema::create('investor_registration_contacts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('investor_regis_id');
+            $table->unsignedBigInteger('investor_regis_id');            
             $table->foreign('investor_regis_id')->references('id')->on('investor_registrations');
-            $table->unsignedBigInteger('address_id');
-            $table->foreign('address_id')->references('id')->on('addresses');
-            $table->unsignedTinyInteger('address_type');// 1 for registered address, 2 for business address
+            $table->string('contact_type');// 1 = hp, 2 = tel, 3 = email, 4 = fax
+            $table->string('contact_detail');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateInvestorRegistrationAddressListTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('investor_registration_address_list');
+        Schema::dropIfExists('investor_registration_contacts');
     }
 }

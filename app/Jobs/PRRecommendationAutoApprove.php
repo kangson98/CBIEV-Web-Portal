@@ -43,7 +43,7 @@ class PRRecommendationAutoApprove implements ShouldQueue
                 foreach ($status-> supervisorRecommendation as $rec) {
                     if($rec-> is_completed === 0)
                     {
-                        $rec-> is_completed = 5;
+                        $rec-> is_completed = 3;
                         $rec-> is_recommended = true;
                         $rec-> completed_at = Carbon::now();
                         $rec-> save();
@@ -59,7 +59,7 @@ class PRRecommendationAutoApprove implements ShouldQueue
                 foreach ($status-> deanHeadRecommendation as $rec) {
                     if($rec-> is_completed === 0)
                     {
-                        $rec-> is_completed = 5;
+                        $rec-> is_completed = 3;
                         $rec-> is_recommended = true;
                         $rec-> completed_at = Carbon::now();
                         $rec-> save();
@@ -76,7 +76,7 @@ class PRRecommendationAutoApprove implements ShouldQueue
                 foreach ($status-> managerRecommendation as $rec) {
                     if($rec-> is_completed === 0)
                     {
-                        $rec-> is_completed = 5;
+                        $rec-> is_completed = 3;
                         $rec-> is_recommended = true;
                         $rec-> completed_at = Carbon::now();
                         $rec-> save();
@@ -89,21 +89,7 @@ class PRRecommendationAutoApprove implements ShouldQueue
                 {
                     $prst-> startDirectorApproval($status-> project_registration_id);
                 }
-                
                 break;
-            // case 4:
-            //     foreach ($status-> directorApproval as $rec) {
-            //         if($rec-> is_completed == 0)
-            //         {
-            //             $rec-> is_completed = 5;
-            //             $rec-> is_recommended = true;
-            //             $rec-> completed_at = Carbon::now();
-            //             $rec-> save();
-
-            //             $this-> autoApprove = true;
-            //         }
-            //     }
-            //     break;
         }
     }
 }

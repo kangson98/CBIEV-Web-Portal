@@ -53,6 +53,31 @@ class InvestorRegistration extends Model
     protected $attributes = [];
 
     // Model Relationship Function
+    /**
+     * Get the contact associate with the investor registration
+     * 
+     */
+    public function investorRegistrationContact()
+    {
+        return $this-> hasMany('App\InvestorRegistrationContact', 'project_regis_id');
+    }
+    /**
+     * Get the contact associate with the investor registration
+     * 
+     */
+    public function investorRegistrationContactPerson()
+    {
+        return $this-> hasMany('App\InvestorRegistrationContactPerson', 'project_regis_id');
+    }
+    /**
+     * Get investor registration associate to the address list
+     * 
+     * @return InvestorRegistration
+     */
+    public function addressList()
+    {
+        return $this->hasMany('App\InvestorRegistrationAddressList', 'investor_regis_id');
+    }
 
     // Model Function
     /**
@@ -80,33 +105,28 @@ class InvestorRegistration extends Model
     /**
      * Create and return new mentor registration
      */
-    public static function createNewMentorRegistration(
+    public static function createNewInvestorRegistration(
         $companyRegisteredName, 
         $businessRegistrationNo, 
         $padiUpCapital, 
         $companyWebsite, 
-        $contactPersonName, 
-        $contactPersonPosition
+        $businessClassification,
+        $businessDescription,
+        $areaOfIntereseted,
+        $isJoinPanel
 
     )
     {
         return InvestorRegistration::create([
-            // 'company_registered_name' => $category,
-            // 'business_registered_no' => $name,
-            // 'paid_up_capital' => $ic,
-            // 'company_website' => $contact,
-            // 'contact_person_name' => $email,
-            // 'contact_person_position' => $company_id,
-            // 'tel_no' => $position,
-            // 'fax_no' => $position,
-            // 'hp_no' => $position,
-            // 'email' => $position,
-            // 'tel_no' => $position,
-            // 'business_classification' => $officialEmail,
-            // 'business_description' => $officialEmail,
-            // 'area_of_intereseted' => $officialEmail,
-            // 'isJoinPanel' => $officialEmail,
-            // 'business_classification' => $officialEmail,
+            'company_registered_name' => $companyRegisteredName,
+            'business_registered_no' => $businessRegistrationNo,
+            'paid_up_capital' => $padiUpCapital,
+            'company_website' => $companyWebsite,
+            
+            'business_classification' => $businessClassification,
+            'business_description' => $businessDescription,
+            'area_of_intereseted' => $areaOfIntereseted,
+            'is_join_panel' => $isJoinPanel,
         ]);
     } 
 }

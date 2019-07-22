@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model
+class MRManagerRecommendationLog extends Model
 {
     /**
      * Table name for this model
      */
-    protected $table = 'addresses';
+    protected $table = 'mr_manager_recommendation_logs';
 
     /**
     * The primary key associated with the model.
@@ -17,6 +17,7 @@ class Address extends Model
     * @var string
     */
     protected $primaryKey = 'id';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,46 +53,12 @@ class Address extends Model
      */
     protected $attributes = [];
 
-    // Model Relationship Function
+    // Model Relation Function
     /**
-     * Get addrress associate with the address list
      * 
      */
-    public static function investorRegistrationAddressList()
+    public function managerRecommendation()
     {
-        return $this->hasOne('App\InvestorRegistrationAddressList', 'address_id');
+        return $this->hasMany('App\MRManagerRecommendation', 'manager_rec_id');
     }
-    // Model Function
-    /**
-     * Create and save new address
-     * 
-     * @param String $line1
-     * @param String $line2
-     * @param String $city
-     * @param String $zip
-     * @param String $state
-     * 
-     * @return Address
-     */
-    public static function createNewAddress(
-        $line1,
-        $line2,
-        $city,
-        $zip,
-        $state
-    )
-    {
-        return Address::create([
-            'line_1' => $line1,
-            'line_2' =>$line2,
-            'city' => $city,
-            'zip' => $zip,
-            'state' => $state
-        ]);
-    } 
-
-
-
-    
-
 }

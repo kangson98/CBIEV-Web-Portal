@@ -80,6 +80,14 @@ class MentorRegistration extends Model
     {
         return $this->hasOne('App\MentorRegistrationExperience', 'mentor_regis_id');
     }
+    /**
+     * Get the status tracking associate with the mentor registration
+     * 
+     */
+    public function statusTracking()
+    {
+        return $this->hasMany('App\MentorRegistration', 'mentor_regis_id');
+    }
     // Model Function
     /**
      * Create and return new mentor registration

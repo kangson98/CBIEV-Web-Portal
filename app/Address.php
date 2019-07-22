@@ -57,7 +57,7 @@ class Address extends Model
      * Get addrress associate with the address list
      * 
      */
-    public static function investorRegistrationAddressList()
+    public function investorRegistrationAddressList()
     {
         return $this->hasOne('App\InvestorRegistrationAddressList', 'address_id');
     }

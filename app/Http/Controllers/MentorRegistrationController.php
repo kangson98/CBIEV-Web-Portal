@@ -8,6 +8,7 @@ use App\MentorRegistration;
 use App\InternalMentorDetail;
 use App\CenterFaculty;
 use App\MentorRegistrationExperience;
+use App\MentorRegistrationStatusTracking;
 
 class MentorRegistrationController extends Controller
 {
@@ -29,7 +30,7 @@ class MentorRegistrationController extends Controller
      */
     public function saveRegistration(Request $request)
     {
-        // return dd($request-> mentorHasCompany);
+        // return dd($request-> mentorExpText);
         // return dd($request);
         // validation
         // check company exist and save
@@ -50,7 +51,7 @@ class MentorRegistrationController extends Controller
             $request-> mentorPosition,
             $request-> mentorCompanyEmail
         );
-
+        $newMentorRegistrationID = $newMentorRegistration-> id;
         // set mentor type sync pivot table
         if($request-> has('mentorTypeBusi') && $request-> mentorTypeBusi == 'on'){// for business mentor
             $newMentorRegistration-> syncMentorTypeBusiness();
@@ -60,21 +61,24 @@ class MentorRegistrationController extends Controller
         }
         // if internal save internal mentor detail
         if ($request-> mentorCategory == 1) {
-            InternalMentorDetail::createNewInternalMentorDetail($newMentorRegistration-> id, (int)$request-> mentorDepartment);
+            InternalMentorDetail::createNewInternalMentorDetail($newMentorRegistrationID, (int)$request-> mentorDepartment);
         }
-        // save mentor exp 
+        // save mentor experience
                
-        MentorRegistrationExperience::createNewMentorRegistration(
-            $newMentorRegistration-> id, 
+        MentorRegistrationExperience::createNewMentorRegistrationExperience(
+            $newMentorRegistrationID, 
             $request-> mentorHasExp, 
             $request-> mentorExpText, 
             $request-> mentorExpEntrepreneuship, 
             $request-> mentoring, 
-            $request-> howHearProgram, 
-            $request-> mentorCategory
+            $request-> howHearProgram
         );
+
+        MentorRegistrationStatusTracking::newRegisteredStatus($newMentorRegistrationID);
         
         // redirect registration summary
+
+        return 'success, mentor';
 
     }
 }

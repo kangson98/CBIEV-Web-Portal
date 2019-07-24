@@ -59,7 +59,14 @@ class Company extends Model
     {
         return $this-> belongsTo('App\MentorRegistration', 'company_id');
     }
-
+    /**
+     * Get the mentor registration associate with the company
+     * 
+     */
+    public function company()
+    {
+        return $this->belongsTo('App\MentorRegistration', 'company_id');
+    }
     // Model Function
 
     /**

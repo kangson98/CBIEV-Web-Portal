@@ -27,7 +27,6 @@ class StaffProjectRegistrationController extends Controller
      */
     public function showProjectRegistrationDetail($id)
     {
-        // return  ProjectRegistration::find($id)-> statusTracking-> where('project_registration_status', 2)-> first()-> deanHeadRecommendation;
         return view('CBIEVStaff.registration.project.project_regist_detail')->with('projectRegis', ProjectRegistration::find($id));
     }
 }

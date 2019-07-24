@@ -61,4 +61,47 @@ class MRManagerRecommendationLog extends Model
     {
         return $this->hasMany('App\MRManagerRecommendation', 'manager_rec_id');
     }
+
+    // Model Function
+    /**
+     * Create a new log
+     * 
+     * @param int $id
+     */
+    public static function createNewLog($recID, $status)
+    {
+        MRManagerRecommendationLog::create([
+            'manager_rec_id' => $recID,
+            'status' => $status
+        ]);
+    }
+
+    /**
+     * Create a new log with status 0 = 'notified' 
+     * 
+     * @param int $id
+     */
+    public static function createNewNotifiedLog($recID)
+    {
+        self::createNewLog($recID, 0);
+    }
+    /**
+     * Create a new log with status 1 = 'completed with recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteRecommendedLog($recID)
+    {
+        self::createNewLog($recID, 1);
+    }
+    /**
+     * Create a new log with status 0 = 'completed with not recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteNotRecommendedLog($recID)
+    {
+        self::createNewLog($recID, 2);
+    }
+    
 }

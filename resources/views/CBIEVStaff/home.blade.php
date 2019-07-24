@@ -23,6 +23,12 @@
                             <ul>
                                 <li><a href="{{route('project.registration.list')}}">Project Registration</a></li>
                             </ul>
+                            <ul>
+                                <li><a href="{{route('mentor.registration.list')}}">Mentor Registration</a></li>
+                            </ul>
+                            <ul>
+                                <li><a href="{{route('investor.registration.list')}}">Investor Registration</a></li>
+                            </ul>
                         </div>
                 </div>
             </div>

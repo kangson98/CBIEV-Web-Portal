@@ -14,6 +14,8 @@ use App\Jobs\PRRecommendationAutoApprove;
 use App\ProjectRegistrationChangeLog;
 use App\PRTempAccount;
 use App\Jobs\SendUpdatedPRNotification;
+use App\MRDeanHeadRecommendation;
+use App\MentorRegistrationStatusTracking;
 
 class ProjectRegistrationStatusTrackingController extends Controller
 {
@@ -144,6 +146,7 @@ class ProjectRegistrationStatusTrackingController extends Controller
 
     public function mailTo()
     {
+        return dd(MentorRegistrationStatusTracking::find(2));
         SendUpdatedPRNotification::dispatch(1)->delay(now()-> addSeconds(100));
 
         // EmailController::reRunProjectRecommendationNotification('a@mail.com', 'b@mail.com', 'Zi Xuan', 2, 'ROCKET VIAl', 1);

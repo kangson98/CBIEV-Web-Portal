@@ -62,9 +62,14 @@ Route::prefix('staff')->group(function(){
             Route::post('start/approval/{id}/{stage}','ProjectRegistrationStatusTrackingController@startApprovalProcess')->name('project.regisration.approval.start');
         });
         Route::prefix('mentor')->group(function(){
-            Route::get('/', 'Registration\StaffProjectRegistrationController@showProjectRegistrationList')->name('project.registration.list');
-            Route::get('{id}', 'Registration\StaffProjectRegistrationController@showProjectRegistrationDetail')->name('project.registration.detail');
-            Route::post('start/approval/{id}/{stage}','ProjectRegistrationStatusTrackingController@startApprovalProcess')->name('project.regisration.approval.start');
+            Route::get('/', 'Registration\StaffMentorRegistrationController@showMentorRegistrationList')->name('mentor.registration.list');
+            Route::get('{id}', 'Registration\StaffMentorRegistrationController@showMentorRegistrationDetail')->name('mentor.registration.detail');
+            Route::post('start/approval/{id}/{stage}','MentorRegistrationStatusTrackingController@startApprovalProcess')->name('mentor.regisration.approval.start');
+        });
+        Route::prefix('investor')->group(function(){
+            Route::get('/', 'Registration\StaffInvestorRegistrationController@showInvestorRegistrationList')->name('investor.registration.list');
+            Route::get('{id}', 'Registration\StaffInvestorRegistrationController@showInvestorRegistrationDetail')->name('investor.registration.detail');
+            Route::post('start/approval/{id}/{stage}','ProjectRegistrationStatusTrackingController@startApprovalProcess')->name('investor.regisration.approval.start');
         });
     });
 });
@@ -80,7 +85,6 @@ Route::prefix('registration')->group(function(){
         Route::get('home', 'PRTempAccountController@home')->name('pr.temp.home');
         Route::post('home', 'PRTempAccountController@update')->name('pr.temp.registration.update');
         Route::get('updateComplete', 'PRTempAccountController@updateComplete')->name('pr.temp.update.complete');
-
     });
 
     Route::prefix('isparkmentor')->group(function(){
@@ -140,3 +144,12 @@ Route::post('/project/rec/manager/post','RecommendationController@saveRecommenda
 
 Route::get('/project/app/director/{recID}','PRDirectorApprovalController@showApprovalForm')->name('project.approval.get');
 Route::post('/project/app/director/post','PRDirectorApprovalController@saveApproval')->name('project.approval.post');
+
+Route::get('/mentor/rec/{recID}','MRDeanHeadRecommendationController@showRecommendationForm')->name('mentor.recommendation.dean.head.get');
+Route::post('/mentor/rec/post','MRDeanHeadRecommendationController@saveRecommendation')->name('mentor.recommendation.dean.head.post');
+
+Route::get('/mentor/rec/manager/{recID}','MRManagerRecommendationController@showRecommendationForm')->name('mentor.recommendation.manager.get');
+Route::post('/mentor/rec/manager/post','MRManagerRecommendationController@saveRecommendation')->name('mentor.recommendation.manager.post');
+
+Route::get('/mentor/app/director/{recID}','MRDirectorApprovalController@showApprovalForm')->name('mentor.approval.get');
+Route::post('/mentor/app/director/post','MRDirectorApprovalController@saveApproval')->name('mentor.approval.post');

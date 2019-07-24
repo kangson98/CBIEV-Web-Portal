@@ -8,6 +8,7 @@ use App\Address;
 use App\InvestorRegistrationContactPerson;
 use App\InvestorRegistrationContact;
 use App\InvestorRegistrationAddressList;
+use App\InvestorRegistrationStatusTracking;
 
 class InvestorRegistrationController extends Controller
 {
@@ -86,6 +87,8 @@ class InvestorRegistrationController extends Controller
         if (isset($request-> companyFax) == true && !($request-> companyFax === '')) {
             InvestorRegistrationContact::newFaxContact($investorRegistrationID, $companyFax);
         }
+
+        InvestorRegistrationStatusTracking::newRegisteredStatus($investorRegistrationID);
 
         // redirect 
 

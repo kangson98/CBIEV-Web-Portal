@@ -65,7 +65,7 @@ class MRManagerRecommendation extends Model
     /**
      * 
      */
-    public function prStatus()
+    public function statusTracking()
     {
         return $this->belongsTo('App\MentorRegistrationStatusTracking', 'status_tracking_id');
     }
@@ -76,5 +76,20 @@ class MRManagerRecommendation extends Model
     public function managerRecommendationLog()
     {
         return $this->hasMany('App\MRManagerRecommendationLog', 'manager_rec_id');
+    }
+
+    // Model Function
+    /**
+     * 
+     */
+    public static function createNewRecommendation($statusID)
+    {
+        return MRManagerRecommendation::create([
+            'recommended_by' => CBIEVStaff::where('role', 2)-> get()-> first()-> id,
+            'is_recommended' => null,
+            'reason' => null,
+            'comment' => null,
+            'status_tracking_id' => $statusID,
+        ]);         
     }
 }

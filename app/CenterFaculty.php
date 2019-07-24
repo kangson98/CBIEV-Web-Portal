@@ -68,7 +68,14 @@ class CenterFaculty extends Model
     {
         return $this->hasOne('App\DeanHead', 'faculty_center_id');
     }
-
+    /**
+     * Get the Internal Mentor Registration detail associate to the the center/faculty
+     * 
+     */
+    public function internalMentorDetail()
+    {
+            return $this->hasMany('App\InternalMentorDetail', 'center_faculty_id');
+    }
     // Model Function 
 
     /**

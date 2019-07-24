@@ -61,6 +61,14 @@ class InternalMentorDetail extends Model
     {
             return $this->belongsTo('App\MentorRegistration', 'mentor_registration_id');
     }
+    /**
+     * Get the Center/Faculty  associate to the internal mentor detail
+     * 
+     */
+    public function centerFaculty()
+    {
+            return $this->belongsTo('App\CenterFaculty', 'center_faculty_id');
+    }
     // Model Function
 
     public static function createNewInternalMentorDetail($mentor_regis_id , $center_faculty_id)

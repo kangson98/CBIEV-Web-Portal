@@ -12,6 +12,7 @@ use App\ProjectSupervisor;
 use App\Mail\SuccessProjectRegistrationNotification;
 use App\Mail\ReRunRecommendationNotification;
 use App\Mail\SuccessMentorRegistrationEmailNotification;
+use App\Mail\MentorRegistrationRecommendationInvitation;
 
 class EmailController extends Controller
 {
@@ -98,9 +99,42 @@ class EmailController extends Controller
     {
         Mail::to([$email, $officialEmail])->send(new SuccessMentorRegistrationEmailNotification($recipient, $mentorRegisID));
     } 
- 
+//////////////////////////////////////////////////////////////
     /**
-     * Generate URL for project registration and approval
+     * Send invitation through email to dean/head for mentor registration recommendation
+     */
+    public static function mrDeanHeadRecommendation($email, $recipient, $mentorName, $url)
+    {
+        Mail::to([$email])
+            ->send(new MentorRegistrationRecommendationInvitation($recipient, $url, $mentorName));
+    }
+
+    /**
+     * Send invitation through email to manager for mentor registration recommendation
+     * @param String $email
+     * @param String $companyEmail
+     * @param integer $recID
+     */
+    public static function mrManagerRecommendation($email, $recipient, $mentorName, $url) 
+    {
+        Mail::to([$email])
+            ->send(new MentorRegistrationRecommendationInvitation($recipient, $url, $mentorName));
+    }
+
+    /**
+     * Send invitation through email to director for mentor registration recommendation
+     * @param String $email
+     * @param String $companyEmail
+     * @param integer $recID
+     */
+    public static function mrDirectorApproval($email, $recipient, $mentorName, $url) 
+    {
+        Mail::to([$email])
+            ->send(new MentorRegistrationApprovalInvitation($recipient, $url, $mentorName));
+    }
+ ///////////////////////////////////////////////////////////////////
+    /**
+     * Generate URL for project registration recommendation and approval
      * 
      * @param
      */
@@ -122,7 +156,5 @@ class EmailController extends Controller
                 break;
         }
         return URL::temporarySignedRoute('project.recommendation.get', now()->addMinutes(2880), ['type'=> $cryptedType, 'recID'=> $cryptedRecID]);
-    }
-
-    
+    } 
 }

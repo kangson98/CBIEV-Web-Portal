@@ -77,4 +77,15 @@ class MRDeanHeadRecommendation extends Model
     {
         return $this->hasMany('App\MRDeanHeadRecommendationLog', 'dean_head_rec_id');
     }
+
+    /**
+     * 
+     */
+    public static function createNewDeanHeadRecommendation($statusTracking, $recommendedBy)
+    {
+        return MRDeanHeadRecommendation::create([
+            'recommended_by' => $recommendedBy,
+            'status_tracking_id' => $statusTracking
+        ]);
+    }
 }

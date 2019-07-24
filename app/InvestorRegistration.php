@@ -57,17 +57,17 @@ class InvestorRegistration extends Model
      * Get the contact associate with the investor registration
      * 
      */
-    public function investorRegistrationContact()
+    public function contact()
     {
-        return $this-> hasMany('App\InvestorRegistrationContact', 'project_regis_id');
+        return $this-> hasMany('App\InvestorRegistrationContact', 'investor_regis_id');
     }
     /**
      * Get the contact associate with the investor registration
      * 
      */
-    public function investorRegistrationContactPerson()
+    public function contactPerson()
     {
-        return $this-> hasMany('App\InvestorRegistrationContactPerson', 'project_regis_id');
+        return $this-> hasMany('App\InvestorRegistrationContactPerson', 'investor_regis_id');
     }
     /**
      * Get investor registration associate to the address list
@@ -128,5 +128,15 @@ class InvestorRegistration extends Model
             'area_of_intereseted' => $areaOfIntereseted,
             'is_join_panel' => $isJoinPanel,
         ]);
+    } 
+
+    /**
+     * Get the lastest status tracking of status for current project 
+     * 
+     */
+    public function statusTrackingLatest(){
+
+        return $this->hasMany('App\InvestorRegistrationStatusTracking', 'investor_regis_id')-> orderBy('created_at', 'desc')-> first();
+
     } 
 }

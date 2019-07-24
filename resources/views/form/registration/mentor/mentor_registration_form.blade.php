@@ -10,19 +10,19 @@
         <div class="mt-5 ">
             <form action="{{route('mentor.registration.submit')}}" method="post">
                 @csrf
-                @component('components.registration.mentor.type_category')
+                @component('components.registration.mentor.form.type_category')
                     
                 @endcomponent
-                @component('components.registration.mentor.personal_info')
+                @component('components.registration.mentor.form.personal_info')
                     
                 @endcomponent
-                @component('components.registration.mentor.company_info',['centerFaculty' => $centerFaculty])
+                @component('components.registration.mentor.form.company_info',['centerFaculty' => $centerFaculty])
                     
                 @endcomponent
-                @component('components.registration.mentor.mentor_exp')
+                @component('components.registration.mentor.form.mentor_exp')
                     
                 @endcomponent
-                @component('components.registration.mentor.mentor_declaration')
+                @component('components.registration.mentor.form.mentor_declaration')
                     
                 @endcomponent
     

@@ -60,7 +60,7 @@ class MentorRegistration extends Model
     public function internalMentorDetail()
     {
         if ($this-> category == 1) {
-            return $this->hasOne('App\InternalMentorDetail', 'mentor_registration_id')->withTimestamps();;
+            return $this->hasOne('App\InternalMentorDetail', 'mentor_registration_id');
         }
     }
 
@@ -70,7 +70,7 @@ class MentorRegistration extends Model
      */
     public function mentorType()
     {
-        return $this-> belongsToMany('App\MentorType', 'mentor_regis_mentor_type', 'mentor_regis_id', 'mentor_type_id')->withTimestamps();;
+        return $this-> belongsToMany('App\MentorType', 'mentor_regis_mentor_type', 'mentor_regis_id', 'mentor_type_id');
     }
 
     /**
@@ -86,7 +86,15 @@ class MentorRegistration extends Model
      */
     public function statusTracking()
     {
-        return $this->hasMany('App\MentorRegistration', 'mentor_regis_id');
+        return $this->hasMany('App\MentorRegistrationStatusTracking', 'mentor_regis_id');
+    }
+    /**
+     * Get the company that own the mentor registration
+     * 
+     */
+    public function company()
+    {
+        return $this->belongsTo('App\Company', 'company_id');
     }
     // Model Function
     /**
@@ -122,6 +130,16 @@ class MentorRegistration extends Model
     {
         $this-> syncMentorTypeBusiness(2);
     }
+
+    /**
+     * Get the lastest status tracking of status for current project 
+     * 
+     */
+    public function statusTrackingLatest(){
+
+        return $this->hasMany('App\MentorRegistrationStatusTracking', 'mentor_regis_id')-> orderBy('created_at', 'desc')-> first();
+
+    } 
 
 
 }

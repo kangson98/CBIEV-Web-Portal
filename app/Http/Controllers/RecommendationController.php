@@ -26,7 +26,7 @@ class RecommendationController extends Controller
             $decryptedType = Crypt::decrypt($cryptedType);
             $decryptedRecID = Crypt::decrypt($cryptedRecID);
         } catch (DecryptException $e) {
-            abort(403);
+            abort(404);
         }
         // return dd($decryptedType, $decryptedRecID);
 

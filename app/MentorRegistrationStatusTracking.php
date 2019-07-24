@@ -62,20 +62,66 @@ class MentorRegistrationStatusTracking extends Model
      */
     public function managerRecommendation()
     {
-        return $this-> hasMany('App\MRManagerRecommendation', 'status_tracking_id');
+        return $this-> hasOne('App\MRManagerRecommendation', 'status_tracking_id');
     }
     /**
      * 
      */
     public function directorApproval()
     {
-        return $this-> hasMany('App\MRdirectorApproval', 'status_tracking_id');
+        return $this-> hasOne('App\MRdirectorApproval', 'status_tracking_id');
     }
     /**
      * 
      */
     public function deanHeadRecommendation()
     {
-        return $this-> hasMany('App\MRDeanHeadRecommendation', 'status_tracking_id');
+        return $this-> hasOne('App\MRDeanHeadRecommendation', 'status_tracking_id');
     }
+
+    // Model Function
+    /**
+     * Create new status for mentor registration
+     */
+    public static function createNewStatus($mentorRegisID, $status)
+    {
+        return MentorRegistrationStatusTracking::create([
+            'mentor_regis_id' => $mentorRegisID,
+            'mentor_registration_status' => $status
+        ]);
+    }
+
+    /**
+     * 
+     */
+    public static function newRegisteredStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 0);
+    }
+
+    /**
+     * 
+     */
+    public static function newDeanHeadRecommendationStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 1);
+    }
+
+    /**
+     * 
+     */
+    public static function newManagerRecommendationStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 2);
+    }
+
+    /**
+     * 
+     */
+    public static function newDirectorApprovalStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 3);
+    }
+
+
 }

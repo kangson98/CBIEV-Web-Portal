@@ -5,7 +5,7 @@ Dear, {{ $recipient }}
 
 <br>
 One of your Faculty/Center member, {{$mentorName}}, have submited a mentor registration.
-@component('mail::button', ['url' =>$url])
+@component('mail::button', ['url' => $url])
 Click Me
 @endcomponent
 

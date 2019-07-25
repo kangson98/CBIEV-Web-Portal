@@ -56,29 +56,33 @@ class Handler extends ExceptionHandler
                     case 'cbiev-staff':
                         $login = 'staff.login';
                         break;
+                    case 'mentor-registration':
+                        $login = 'mentor.temp.registration.login';
+                        break;
                     default:
                         $login = 'login';
                         break;
                 }
 
-            return redirect()->route($login);
+                return redirect()->route($login);
+            break;
     }
 
         return parent::render($request, $exception);
     }
 
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        if(in_array('cbiev-staff', $exception->guards())){
-            return redirect(route('staff.login.show'));
-            return dd('staff');
-        }else if(in_array('participant', $exception->guards())){
-            return redirect(route('participant.login.show'));
-            return dd('staff');
-        }{
-            return dd('web');
-        }
-    }
+    // protected function unauthenticated($request, AuthenticationException $exception)
+    // {
+    //     if(in_array('cbiev-staff', $exception->guards())){
+    //         return redirect(route('staff.login.show'));
+    //         return dd('staff');
+    //     }else if(in_array('participant', $exception->guards())){
+    //         return redirect(route('participant.login.show'));
+    //         return dd('staff');
+    //     }{
+    //         return dd('web');
+    //     }
+    // }
     // {
     //     if ($request->expectsJson()) {
     //         return response()->json(['error' => 'Unauthenticated.'], 401);

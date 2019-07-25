@@ -7,24 +7,19 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class MentorRegistrationApprovalInvitation extends Mailable
+class MentorRegistrationNotRecommendedNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $recipient;
-    public $url;
-    public $mentorName;
-    
+    public $registrantName;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($recipient, $url, $mentorName)
+    public function __construct($registrantName)
     {
-        $this-> recipient = $recipient;
-        $this-> url = $url;
-        $this-> mentorName = $mentorName;
+        $this-> registrantName = $registrantName;
     }
 
     /**
@@ -33,7 +28,7 @@ class MentorRegistrationApprovalInvitation extends Mailable
      * @return $this
      */
     public function build()
-    {   
-        return $this->markdown('markdown_mail.mentor_regis_app_invite');
+    {
+        return $this->view('view.name');
     }
 }

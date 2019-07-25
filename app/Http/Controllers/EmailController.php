@@ -13,6 +13,9 @@ use App\Mail\SuccessProjectRegistrationNotification;
 use App\Mail\ReRunRecommendationNotification;
 use App\Mail\SuccessMentorRegistrationEmailNotification;
 use App\Mail\MentorRegistrationRecommendationInvitation;
+use App\Mail\MentorRegistrationNotRecommendedNotification;
+use App\Mail\MentorRegistrationTerminatedNotification;
+use App\Mail\MentorRegistrationApprovalInvitation;
 
 class EmailController extends Controller
 {
@@ -28,7 +31,7 @@ class EmailController extends Controller
     {
         $url = self::generateURL($recID, 1);//pass 1 as type supervisor
         Mail::to([$email, $companyEmail])
-            ->send(new ProjectRegistrationRecommendationInvitation($recipient, $url));
+            ->later(self::tenSecondDelayTime(),new ProjectRegistrationRecommendationInvitation($recipient, $url));
     }
 
     /**
@@ -41,7 +44,7 @@ class EmailController extends Controller
     {
         $url = self::generateURL($recID, 2);//pass 2 as type dean/head
         Mail::to([$email])
-            ->send(new ProjectRegistrationRecommendationInvitation($recipient, $url));
+            ->later(self::tenSecondDelayTime(),new ProjectRegistrationRecommendationInvitation($recipient, $url));
     }
 
     /**
@@ -54,95 +57,135 @@ class EmailController extends Controller
     {
         $url = self::generateURL($recID, 3);//pass 3 as type manager
         Mail::to([$email])
-            ->send(new ProjectRegistrationRecommendationInvitation($recipient, $url));
+            ->later(self::tenSecondDelayTime(),new ProjectRegistrationRecommendationInvitation($recipient, $url));
     }
 
     /**
      * Send Director Approval Invitation
      * 
-     * 
+     * @param String $email 
+     * @param Integer $appID
+     * @param String $recipient 
      */
     public static function directorApproval($email, $appID, $recipient)
     {
         $url = self::generateURL($appID, 4);
         Mail::to([$email])
-            ->send(new ProjectRegistrationRecommendationInvitation($recipient, $url));
+            ->later(self::tenSecondDelayTime(),new ProjectRegistrationRecommendationInvitation($recipient, $url));
     }
 
     /**
      * Send Success Project Registration Email notification 
      * 
-     * @param   
-     * @param
-     * @param
+     * @param String $recipient 
+     * @param Integer $projectID
+     * @param String $projectTitle 
      */
     public static function successProjectRegistrations($recipient, $projectID, $projectTitle)
     {
-        Mail::to([$recipient-> email, $recipient-> company_email])->later(now()->addSeconds(10), new SuccessProjectRegistrationNotification($recipient-> name, $projectTitle, $projectID));
+        Mail::to([$recipient-> email, $recipient-> company_email])
+            ->later(self::tenSecondDelayTime(), new SuccessProjectRegistrationNotification($recipient-> name, $projectTitle, $projectID));
 
     }
 
     /**
-     * Re-Notification Project Recommendation\
+     * Re-Notification for Project Recommendation
      * 
+     * @param String $recipient
+     * @param Integer $mentorRegisID
+     * @param String $email 
+     * @param Integer $officialEmail 
      */
-    public static function reRunProjectRecommendationNotification($email, $companyEmail, $recipient, $recID, $projectTitle, $type)
+    public static function reRunProjectRecommendationNotification($email, $officialEmail, $recipient, $recID, $projectTitle, $type)
     {
         $url = self::generateURL($recID, $type);
-        Mail::to([$email, $companyEmail])->later(now()->addSeconds(10),new ReRunRecommendationNotification($recipient, $projectTitle, $url));
+        Mail::to([$email, $officialEmail])
+            ->later(self::tenSecondDelayTime(), new ReRunRecommendationNotification($recipient, $projectTitle, $url));
     } 
+//////////////////////////////////////////////////////////////
 
     /**
-     * 
+     * Send successful mentor registration notification to registrant
+     * @param String $recipient
+     * @param Integer $mentorRegisID
+     * @param String $email 
+     * @param Integer $officialEmail 
      */
     public static function successMentorRegistrations($recipient, $mentorRegisID, $email, $officialEmail)
     {
-        Mail::to([$email, $officialEmail])->send(new SuccessMentorRegistrationEmailNotification($recipient, $mentorRegisID));
+        Mail::to([$email, $officialEmail])
+            ->later(self::tenSecondDelayTime(), new SuccessMentorRegistrationEmailNotification($recipient, $mentorRegisID));
     } 
-//////////////////////////////////////////////////////////////
+
     /**
      * Send invitation through email to dean/head for mentor registration recommendation
      */
     public static function mrDeanHeadRecommendation($email, $recipient, $mentorName, $url)
     {
         Mail::to([$email])
-            ->send(new MentorRegistrationRecommendationInvitation($recipient, $url, $mentorName));
+            ->later(self::tenSecondDelayTime(), new MentorRegistrationRecommendationInvitation($recipient, $url, $mentorName));
     }
 
     /**
      * Send invitation through email to manager for mentor registration recommendation
      * @param String $email
      * @param String $companyEmail
-     * @param integer $recID
+     * @param Integer $recID
      */
     public static function mrManagerRecommendation($email, $recipient, $mentorName, $url) 
     {
         Mail::to([$email])
-            ->send(new MentorRegistrationRecommendationInvitation($recipient, $url, $mentorName));
+            ->later(self::tenSecondDelayTime(), new MentorRegistrationRecommendationInvitation($recipient, $url, $mentorName));
     }
 
     /**
      * Send invitation through email to director for mentor registration recommendation
      * @param String $email
      * @param String $companyEmail
-     * @param integer $recID
+     * @param Integer $recID
      */
     public static function mrDirectorApproval($email, $recipient, $mentorName, $url) 
     {
         Mail::to([$email])
-            ->send(new MentorRegistrationApprovalInvitation($recipient, $url, $mentorName));
+            ->later(self::tenSecondDelayTime(), new MentorRegistrationApprovalInvitation($recipient, $url, $mentorName));
+    }
+
+    /**
+     * Send notification throught email with information regarding NOT RECOMMENDED Mentor Registration to registrant
+     * @param MentorRegis $mentorRegis
+     * @param String $comment
+     * @param String $email
+     */
+    public static function mrDeanHeadNotRecommend($mentorRegis, $comment, $reason)
+    {
+        Mail::to([$mentorRegis-> email, $mentorRegis-> company_email])
+            ->later(self::tenSecondDelayTime(), new MentorRegistrationNotRecommendedNotification($mentorRegis-> name, $comment, $reason));
+
+    }
+
+    /**
+     * Send notification throught email regarding SUCCESSFUL TERMINATION of the mentor registration to registrant
+     */
+    public static function mrTermination($recipient, $email, $officialEmail)
+        
+    {
+        Mail::to([$email, $officialEmail])
+            ->later(self::tenSecondDelayTime(), new MentorRegistrationTerminatedNotification($recipient));
     }
  ///////////////////////////////////////////////////////////////////
     /**
      * Generate URL for project registration recommendation and approval
      * 
-     * @param
+     * @param int $recID
+     * @param int $type
      */
     public static function generateURL($recID, $type)
     {
+        // encrypt the recommendatiom id and type
         $cryptedRecID = Crypt::encrypt($recID);
         $cryptedType = Crypt::encrypt($type);
 
+        // check the type and generate correct URL 
         switch ($type) {
             case 1:
             case 2:
@@ -154,7 +197,19 @@ class EmailController extends Controller
             case 4:
                 return URL::temporarySignedRoute('project.approval.get', now()->addMinutes(2880), ['type'=> $cryptedType, 'recID'=> $cryptedRecID]);
                 break;
+            default:
+            // abort the request if no matched case
+                abort(404);
         }
-        return URL::temporarySignedRoute('project.recommendation.get', now()->addMinutes(2880), ['type'=> $cryptedType, 'recID'=> $cryptedRecID]);
     } 
+
+    /**
+     * Get 10 second delay time to queue email
+     * 
+     * @return Carbon/Date
+     */
+    public static function tenSecondDelayTime()
+    {
+        return now()->addSeconds(10);
+    }
 }

@@ -74,7 +74,7 @@
                                         {{ __('Logout') }}
                                     </a>
                                     @elseif (Auth::guard('project-registration')->check() && Request::is('registration/isparkproject/*'))
-                                    <a class="dropdown-item" href="{{ route('pr.temp.logout') }}">
+                                    <a class="dropdown-item" href="{{ route('mentor.temp.logout') }}">
                                         {{ __('Logout') }}
                                     </a>
                                     @endif

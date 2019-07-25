@@ -96,6 +96,15 @@ class MentorRegistration extends Model
     {
         return $this->belongsTo('App\Company', 'company_id');
     }
+
+    /**
+     * Get the Change Log associate with the mentor registration
+     * 
+     */
+    public function changeLog()
+    {
+        return $this-> hasMany('App\MentorRegistrationChangeLog', 'mentor_registration_id');
+    }
     // Model Function
     /**
      * Create and return new mentor registration
@@ -140,6 +149,25 @@ class MentorRegistration extends Model
         return $this->hasMany('App\MentorRegistrationStatusTracking', 'mentor_regis_id')-> orderBy('created_at', 'desc')-> first();
 
     } 
+
+    /**
+     * Terminate the mentor registration
+     * 
+     * @param Integer $id
+     */
+    public static function terminateMentorRegistration($id)
+    {
+        try {
+            $mentorRegis = MentorRegistration::findOrFail();
+            $mentorRegis-> update(
+                [
+                    'is_terminate' => true
+                ]
+            );
+        } catch (\Throwable $e) {
+            abort(401);
+        }
+    }
 
 
 }

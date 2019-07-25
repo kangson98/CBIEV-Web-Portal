@@ -90,6 +90,14 @@ Route::prefix('registration')->group(function(){
     Route::prefix('isparkmentor')->group(function(){
         Route::get('', 'MentorRegistrationController@showRegistrationForm')->name('mentor.registration.show');
         Route::post('', 'MentorRegistrationController@saveRegistration')->name('mentor.registration.submit');
+        Route::post('/terminate/{id}', 'MentorRegistrationController@terminateRegistration')->name('mentor.registration.terminate');
+
+        Route::get('login', 'Auth\MRTempAccount\LoginController@showLoginForm')->name('mentor.temp.registration.login');
+        Route::post('login', 'Auth\MRTempAccount\LoginController@login')->name('mentor.temp.registration.login.submit');
+        Route::get('logout', 'Auth\MRTempAccount\LoginController@logout')->name('mentor.temp.logout');
+        Route::get('home', 'MRTempAccountController@home')->name('mentor.temp.home');
+        Route::post('home', 'MRTempAccountController@update')->name('mentor.temp.registration.update');
+        Route::get('updateComplete', 'PRTempAccountController@updateComplete')->name('mentor.temp.update.complete');
     });
     Route::prefix('isparkinvestor')->group(function(){
         Route::get('', 'InvestorRegistrationController@showRegistrationForm')->name('investor.registration.show');

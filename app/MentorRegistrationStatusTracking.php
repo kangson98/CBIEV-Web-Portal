@@ -123,5 +123,13 @@ class MentorRegistrationStatusTracking extends Model
         return self::createNewStatus($mentorRegisID, 3);
     }
 
+    /**
+     * Create new mentor status with terminated
+     */
+    public static function newTerminatedStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 4);
+    }
+
 
 }

@@ -55,9 +55,6 @@ class PRCreateNewTempAccount implements ShouldQueue
             $tempAcc-> activate();
         }
 
-    
-
-        
         Mail::to([$this-> leader-> email, $this-> leader-> company_email])->send(new ProjectRegistrationNotRecommendedNotification($this-> projectRegis-> title, $this-> leader-> name));
     
     }

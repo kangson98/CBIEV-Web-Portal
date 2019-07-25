@@ -24,6 +24,7 @@ class CreateMentorRegistrationsTable extends Migration
             $table->foreign('company_id')->references('id')->on('companies');
             $table->string('position')->nullable();
             $table->string('official_email')->nullable();
+            $table->string('is_terminate')->default(0);
             $table->timestamps();
         });
     }

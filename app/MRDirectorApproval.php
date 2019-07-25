@@ -77,4 +77,29 @@ class MRDirectorApproval extends Model
     {
         return $this->hasMany('App\MRDirectorApprovalLog', 'director_app_id');
     }
+
+    // Model Function
+    /**
+     * 
+     */
+    public static function createNewDirectorApproval($statusID, $directorID)
+    {
+        return MRDirectorApproval::create([
+            'recommended_by' => $directorID,
+            'is_recommended' => null,
+            'reason' => null,
+            'comment' => null,
+            'status_tracking_id' => $statusID,
+        ]);      
+    }
+
+    /**
+     * Update recommendation URL
+     */
+    public function updateURL($url)
+    {
+        $this->update([
+            'url' => $url
+        ]);
+    }
 }

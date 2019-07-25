@@ -9,6 +9,7 @@ use App\InternalMentorDetail;
 use App\CenterFaculty;
 use App\MentorRegistrationExperience;
 use App\MentorRegistrationStatusTracking;
+use Illuminate\Support\Facades\Crypt;
 
 class MentorRegistrationController extends Controller
 {
@@ -80,5 +81,60 @@ class MentorRegistrationController extends Controller
 
         return 'success, mentor';
 
+    }
+
+    /**
+     * Show termination confirmation form
+     * 
+     * @param Integer $id
+     * 
+     * @return View view
+     */
+    public function showTerminationForm($id)
+    {
+        MentorRegistrationStatusTrackingController::decrypt($id);
+
+        return view('');
+    }
+
+    /**
+     * Terminate the mentor registration
+     * 
+     */
+    public function terminateRegistration(Request $request)
+    {
+        $decryptedID = $this-> decrypt($request-> id);
+        // Terminate the mentor registration
+        MentorRegistration::terminateMentorRegistration($decryptedID);
+
+        MentorRegistrationStatusTracking::newTerminatedStatus($this-> find($decryptedID));
+        // Notify registrant successfull termination of the mentor registration
+        EmailController::mentorRegistrationTermination();
+    }
+
+    /**
+     * Find and return mentor registration
+     * 
+     * @param Interger id
+     */
+    public function find($id)
+    {
+        return MentorRegistration::find($id);
+    }
+
+    /**
+     * Decrypted encrypted value
+     * 
+     * @param String
+     * 
+     * @return Mixed
+     */
+    public function decrypt($encryptedValue)
+    {
+        try {
+            return Crypt::decrypt($encryptedValue);
+        } catch (Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(401);
+        }
     }
 }

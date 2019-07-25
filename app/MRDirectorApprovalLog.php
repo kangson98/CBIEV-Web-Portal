@@ -70,8 +70,8 @@ class MRDirectorApprovalLog extends Model
      */
     public static function createNewLog($recID, $status)
     {
-        MRManagerRecommendationLog::create([
-            'manager_rec_id' => $recID,
+        MRDirectorApprovalLog::create([
+            'director_app_id' => $recID,
             'status' => $status
         ]);
     }
@@ -102,5 +102,23 @@ class MRDirectorApprovalLog extends Model
     public static function createNewCompleteNotRecommendedLog($recID)
     {
         self::createNewLog($recID, 2);
+    }
+    /**
+     * Create a new log with status 1 = 'completed with recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteAgreeLog($recID)
+    {
+        self::createNewLog($recID, 3);
+    }
+    /**
+     * Create a new log with status 0 = 'completed with not recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteNotAgreeLog($recID)
+    {
+        self::createNewLog($recID, 4);
     }
 }

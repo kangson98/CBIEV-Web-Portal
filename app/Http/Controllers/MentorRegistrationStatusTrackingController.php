@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\URL;
 use App\MRDeanHeadRecommendationLog;
 use App\MRDirectorApprovalLog;
 use App\Jobs\InsertLinkIntoDirectorApprovalManagerRecommendation;
+use App\MRDirectorApproval;
 
 class MentorRegistrationStatusTrackingController extends Controller
 {
@@ -48,7 +49,6 @@ class MentorRegistrationStatusTrackingController extends Controller
         MRDeanHeadRecommendationLog::createNewNotifiedLog($deanHeadRecommendationID);
 
         MRRecommendationAutoApprove::dispatch($statusTrackingID)->delay(now()->addSeconds(5));
-
     }
     /**
      * 
@@ -57,14 +57,17 @@ class MentorRegistrationStatusTrackingController extends Controller
     {
         $statusTrackingID = MentorRegistrationStatusTracking::newManagerRecommendationStatus($mentorRegistration-> id)-> id;
 
-        $managerRecommendationID = MRManagerRecommendation::createNewRecommendation($statusTrackingID);
-
         $manager = CBIEVStaff::where('role', 2)-> get()-> first();
 
+        $managerRecommendation = MRManagerRecommendation::createNewRecommendation($statusTrackingID, $manager-> id);
+        
+        $managerRecommendationID = $managerRecommendation-> id;
+                
         $url = self::generateURLStatic($managerRecommendationID, 2);
-        EmailController::mrManagerRecommendation($manager-> email, $managerRecommendationID, $manager-> name, $mentorRegistration-> name, $url);
+        
+        $managerRecommendation-> updateURL($url);
 
-        self::insertLink($url, 2);
+        EmailController::mrManagerRecommendation($manager-> email, $manager-> name, $mentorRegistration-> name, $url);
 
         MRManagerRecommendationLog::createNewNotifiedLog($managerRecommendationID);
     }
@@ -73,20 +76,21 @@ class MentorRegistrationStatusTrackingController extends Controller
      */
     public static function startDirectorApproval($mentorRegistration)
     {
-        $statusTrackingID = MentorRegistrationStatusTracking::newDirectorRecommendationStatus($mentorRegistration-> id)-> id;
-
-        $directorRecommendationID = MRManagerRecommendation::createNewRecommendation($statusTrackingID);
+        $statusTrackingID = MentorRegistrationStatusTracking::newDirectorApprovalStatus($mentorRegistration-> id)-> id;
 
         $director = CBIEVStaff::where('role', 3)-> get()-> first();
 
-        $url = self::generateURLStatic($directorRecommendationID, 3);
+        $directorApproval = MRDirectorApproval::createNewDirectorApproval($statusTrackingID, $director-> id);
+
+        $directorApprovalID = $directorApproval-> id;
+
+        $url = self::generateURLStatic($directorApprovalID, 3);
+
+        $directorApproval->updateURL($url);
 
         EmailController::mrDirectorApproval($director-> email, $director-> name, $mentorRegistration-> name, $url);
 
-        self::insertLink($url, 3);
-
-        MRDirectorApprovalLog::createNewNotifiedLog($directorRecommendationID);
-
+        MRDirectorApprovalLog::createNewNotifiedLog($directorApprovalID);
     }
 
     /**
@@ -98,15 +102,15 @@ class MentorRegistrationStatusTrackingController extends Controller
 
         switch ($type) {
             case 1:
-            case 2:
                 return URL::temporarySignedRoute('mentor.recommendation.dean.head.get', now()->addMinutes(2880), ['recID'=> $cryptedRecID]);
                 break;
-            case 3:
+            case 2:
                 return URL::temporarySignedRoute('mentor.recommendation.manager.get', now()->addMinutes(2880), ['recID'=> $cryptedRecID]);
                 break;
-            case 4:
+            case 3:
                 return URL::temporarySignedRoute('mentor.approval.get', now()->addMinutes(2880), ['recID'=> $cryptedRecID]);
                 break;
+            case 4:
         }
     }
     /**
@@ -118,23 +122,16 @@ class MentorRegistrationStatusTrackingController extends Controller
 
         switch ($type) {
             case 1:
-            case 2:
                 return URL::temporarySignedRoute('mentor.recommendation.dean.head.get', now()->addMinutes(2880), ['recID'=> $cryptedRecID]);
                 break;
-            case 3:
+            case 2:
                 return URL::temporarySignedRoute('mentor.recommendation.manager.get', now()->addMinutes(2880), ['recID'=> $cryptedRecID]);
                 break;
-            case 4:
+            case 3:
                 return URL::temporarySignedRoute('mentor.approval.get', now()->addMinutes(2880), ['recID'=> $cryptedRecID]);
                 break;
+            case 4:
         }
     }
 
-    /**
-     * 
-     */
-    public static function insertLink($url, $type)
-    {
-        InsertLinkIntoDirectorApprovalManagerRecommendation::dispatch($url, $type)->delay(now()->addSeconds(5));
-    }
 }

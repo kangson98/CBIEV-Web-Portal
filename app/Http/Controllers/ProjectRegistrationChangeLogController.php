@@ -16,6 +16,7 @@ class ProjectRegistrationChangeLogController extends Controller
             self::createNewLog($prID, 'product_solution', $newPR-> product_solution, $oldPR-> product_solution);
 
         }
+        
         if (strcasecmp ($newPR-> target_market, $oldPR-> target_market) != 0) {
             self::createNewLog($prID, 'target_market', $newPR-> target_market, $oldPR-> target_market);
         }

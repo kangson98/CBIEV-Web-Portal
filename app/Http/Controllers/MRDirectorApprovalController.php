@@ -6,62 +6,96 @@ use Illuminate\Http\Request;
 use App\MRDirectorApprovalLog;
 use Illuminate\Support\Facades\Crypt;
 use App\MRDirectorApproval;
+use App\MentorRegistrationStatusTracking;
 
 class MRDirectorApprovalController extends Controller
 {
     /**
      * Show Recommendation Form
      */
-    public function showRecommendationForm(Request $request, $recID)
+    public function showApprovalForm(Request $request, $recID)
     {
+        //check if the request has valid signature
         if (! $request->hasValidSignature()) {
             abort(404);
         }
-
+        // decrypt approval id
         $decryptedRecID = $this-> decrypt($recID);
+
+        // retreive director aprpoval
         $directorApproval = $this-> find($decryptedRecID);
 
+        // retrieve mentor registration
         $mentorRegis = $directorApproval-> statusTracking-> mentorRegistration;
+        $mrID = $mentorRegis-> id;
 
-        return view('form.recommendation.mentor_registration.mentor_recommendation',['type' => 3, 'recID' => $decryptedRecID]);
+        // retreive manager recommendation 
+        $statusTracking = MentorRegistrationStatusTracking::where('mentor_regis_id', $mrID)->where('mentor_registration_status', 2)->orderBy('created_at', 'desc')-> first();
+
+        // check manager recommedation status for not recommend or recommend
+        $managerRec = $statusTracking-> managerRecommendation-> managerRecommendationLog-> sortByDesc('created_at')-> first()-> status;
+
+        if ($managerRec == 1) {
+            $approvalType = 1;// if manager recommend
+        }else if($managerRec == 2){
+            $approvalType = 2;// if manager not recommend
+        }
+        // return to mentor approval view
+        return view('form.recommendation.mentor_registration.mentor_recommendation',['type' => 3, 'appID' => $recID, 'approvalType' => $approvalType, 'mentorRegis' => $mentorRegis]);
     }
 
     /**
      * Save manager recommendation
      * 
      */
-    public function saveRecommendation(Request $request)
+    public function saveApproval(Request $request)
     {
+        // return dd(gettype((int)$request-> approvalType));
         // decrypt the crypted id
         $decryptedRecID = $this-> decrypt($request-> appID);
+        $decryptedApprovalType = $this-> decrypt($request-> approvalType);
 
         // retrieve the manager recommendation from database
         $directorApproval = $this-> find($decryptedRecID);
-
         // check if the retrieved manager recommendation is completed
-        foreach ($directorApproval-> managerRecommendationLog as $log) {
+        foreach ($directorApproval-> directorApprovalLog as $log) {
             if ($log-> status == 1 || $log-> status == 2) {
                 abort(401);// abort the request if the conditions match
             }
         }
         
-        // update and save manager recommendation
+        // update director approval comment and reason
         $directorApproval-> update([
-            'is_recommended' => $request-> approval,
-            'reason' => $request-> approvalReason,
-            'comment' => $request-> approvalComment
+            'reason' => 'reason',
+            // 'comment' => $request-> reason,
+            'comment' => $request-> approvalComment,
         ]);
 
-        // Log the status
-        if ($request-> recommendation == 1) {
-            // Log with status 1
-            MRDirectorApprovalLog::createNewCompleteRecommendedLog($decryptedRecID);
-        }else{
-            // Log with status 2
-            MRDirectorApprovalLog::createNewCompleteNotRecommendedLog($decryptedRecID);
+        $approval = (int)$request-> approval;
+        // check approval type 
+        switch ((int)$decryptedApprovalType) {
+            case 1:
+                // check approval and create new approval log
+                if ($approval == 1) {
+                    MRDirectorApprovalLog::createNewCompleteRecommendedLog($decryptedRecID);
+                }elseif($approval == 2){
+                    MRDirectorApprovalLog::createNewCompleteNotRecommendedLog($decryptedRecID);
+                }
+                break;
+            case 2:
+                // check approval and create new agreement log
+                if ($approval ==1) {
+                    MRDirectorApprovalLog::createNewCompleteAgreeLog($decryptedRecID);
+                }elseif($approval == 2){
+                    MRDirectorApprovalLog::createNewCompleteNotAgreeLog($decryptedRecID);
+                    MentorRegistrationStatusTrackingController::startManagerRecommendation($directorApproval-> statusTracking-> mentorRegistration);
+                }
+                break;
+            default:
+                abort(401);// abort if no match
+                break;
         }
-        
-        MentorRegistrationStatusTrackingController::startDirectorApproval($directorApproval-> statusTracking-> mentorRegistration);
+     
         //redirect 
         // return redirect(route('mentor.registration.detail',['id' => $decryptedRecID]));
         return 'dire app';
@@ -73,6 +107,7 @@ class MRDirectorApprovalController extends Controller
      */
     public function find($id)
     {
+        //return director approval by id 
         return MRDirectorApproval::find($id)->first();
     }
 
@@ -87,6 +122,7 @@ class MRDirectorApprovalController extends Controller
         } catch (Illuminate\Contracts\Encryption\DecryptException $e) {
             abort(404);// abort if exception pop
         }
+        // return decrypted value
         return $decryptedInput;
     }
 }

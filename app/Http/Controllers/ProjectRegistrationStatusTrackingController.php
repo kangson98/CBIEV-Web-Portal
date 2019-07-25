@@ -16,6 +16,7 @@ use App\PRTempAccount;
 use App\Jobs\SendUpdatedPRNotification;
 use App\MRDeanHeadRecommendation;
 use App\MentorRegistrationStatusTracking;
+use Illuminate\Support\Facades\Hash;
 
 class ProjectRegistrationStatusTrackingController extends Controller
 {
@@ -146,7 +147,10 @@ class ProjectRegistrationStatusTrackingController extends Controller
 
     public function mailTo()
     {
-        return dd(MentorRegistrationStatusTracking::find(2));
+        return dd(MentorRegistrationStatusTracking::where('mentor_regis_id', 1)->where('mentor_registration_status', 2)->orderBy('created_at', 'desc')-> first()-> managerRecommendation);
+        $a = MentorRegistrationStatusTracking::find(2)->attributesToArray();
+        // return dd(Hash::make(970303055007));
+        return dd(array_keys(($a[0])));
         SendUpdatedPRNotification::dispatch(1)->delay(now()-> addSeconds(100));
 
         // EmailController::reRunProjectRecommendationNotification('a@mail.com', 'b@mail.com', 'Zi Xuan', 2, 'ROCKET VIAl', 1);

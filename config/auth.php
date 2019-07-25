@@ -59,6 +59,10 @@ return [
             'driver' => 'session',
             'provider' => 'project-registrations',
         ],
+        'mentor-registration' => [
+            'driver' => 'session',
+            'provider' => 'mentor-registrations',
+        ],
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -78,9 +82,9 @@ return [
             'driver' => 'token',
             'provider' => 'ispark-projects',
         ],
-        'project-registration-api' => [
+        'mentor-registration-api' => [
             'driver' => 'token',
-            'provider' => 'project-registrations',
+            'provider' => 'mentor-registrations',
         ],
     ],
 
@@ -121,6 +125,10 @@ return [
         'project-registrations' => [
             'driver' => 'eloquent',
             'model' => App\PRTempAccount::class,
+        ],
+        'mentor-registrations' => [
+            'driver' => 'eloquent',
+            'model' => App\MRTempAccount::class,
         ],
         // 'users' => [
         //     'driver' => 'database',
@@ -166,6 +174,11 @@ return [
         ],
         'project-registrations' => [
             'provider' => 'project-registrations',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'mentor-registrations' => [
+            'provider' => 'mentor-registrations',
             'table' => 'password_resets',
             'expire' => 60,
         ],

@@ -82,14 +82,24 @@ class MRManagerRecommendation extends Model
     /**
      * 
      */
-    public static function createNewRecommendation($statusID)
+    public static function createNewRecommendation($statusID, $managerID)
     {
         return MRManagerRecommendation::create([
-            'recommended_by' => CBIEVStaff::where('role', 2)-> get()-> first()-> id,
+            'recommended_by' => $managerID,
             'is_recommended' => null,
             'reason' => null,
             'comment' => null,
             'status_tracking_id' => $statusID,
         ]);         
+    }
+
+    /**
+     * Update recommendation URL
+     */
+    public function updateURL($url)
+    {
+        $this->update([
+            'url' => $url
+        ]);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\MRDeanHeadRecommendation;
 use App\MRDeanHeadRecommendationLog;
+use App\Jobs\MRCreateNewTempAccount;
+use Illuminate\Support\Facades\Crypt;
 
 class MRDeanHeadRecommendationController extends Controller
 {
@@ -55,16 +57,18 @@ class MRDeanHeadRecommendationController extends Controller
             'comment' => $request-> recommendationComment
         ]);
 
+        $mentorRegistration = $deanHeadRecommendation-> statusTracking-> mentorRegistration;
         // Log the status
         if ($request-> recommendation == 1) {
             // Log with status 1
             MRDeanHeadRecommendationLog::createNewCompleteRecommendedLog($decryptedRecID);
+            MentorRegistrationStatusTrackingController::startManagerRecommendation($mentorRegistration);
         }else{
             // Log with status 2
             MRDeanHeadRecommendationLog::createNewCompleteNotRecommendedLog($decryptedRecID);
+            MRCreateNewTempAccount::dispatch($mentorRegistration)->delay(now()->addSeconds(5));
         }
         
-        MentorRegistrationStatusTrackingController::startManagerRecommendation($deanHeadRecommendation-> statusTracking-> mentorRegistration);
         //redirect 
         // return redirect(route('mentor.registration.detail',['id' => $decryptedRecID]));
         return 'dean head rec';

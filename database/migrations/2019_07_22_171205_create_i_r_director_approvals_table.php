@@ -22,6 +22,7 @@ class CreateIRDirectorApprovalsTable extends Migration
             $table->text('comment')->nullable();
             $table->unsignedBigInteger('status_tracking_id');
             $table->foreign('status_tracking_id')->references('id')->on('ir_status_trackings');
+            $table->text('url',1000)->nullable();
             $table->timestamps();
         });
     }

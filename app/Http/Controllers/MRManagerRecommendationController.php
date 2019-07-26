@@ -73,7 +73,7 @@ class MRManagerRecommendationController extends Controller
      */
     public function find($id)
     {
-        return MRManagerRecommendation::find($id)->first();
+        return MRManagerRecommendation::find($id);
     }
 
     /**

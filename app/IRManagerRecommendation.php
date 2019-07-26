@@ -65,7 +65,7 @@ class IRManagerRecommendation extends Model
     /**
      * 
      */
-    public function prStatus()
+    public function statusTracking()
     {
         return $this->belongsTo('App\InvestorRegistrationStatusTracking', 'status_tracking_id');
     }
@@ -76,5 +76,30 @@ class IRManagerRecommendation extends Model
     public function managerRecommendationLog()
     {
         return $this->hasMany('App\IRManagerRecommendationLog', 'manager_rec_id');
+    }
+
+    // Model Function
+    /**
+     * 
+     */
+    public static function createNewRecommendation($statusID, $managerID)
+    {
+        return IRManagerRecommendation::create([
+            'recommended_by' => $managerID,
+            'is_recommended' => null,
+            'reason' => null,
+            'comment' => null,
+            'status_tracking_id' => $statusID,
+        ]);         
+    }
+
+    /**
+     * Update recommendation URL
+     */
+    public function updateURL($url)
+    {
+        $this->update([
+            'url' => $url
+        ]);
     }
 }

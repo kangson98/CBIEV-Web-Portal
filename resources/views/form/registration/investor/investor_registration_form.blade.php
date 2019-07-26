@@ -9,19 +9,19 @@
         <div class="mtb-5 ">
             <form action="{{route('investor.registration.submit')}}" method="post">
                 @csrf
-                @component('components.registration.investor.company_info')
+                @component('components.registration.investor.form.company_info')
                     
                 @endcomponent
-                @component('components.registration.investor.contact_person')
+                @component('components.registration.investor.form.contact_person')
                     
                 @endcomponent
-                @component('components.registration.investor.company_contact')
+                @component('components.registration.investor.form.company_contact')
                     
                 @endcomponent
-                @component('components.registration.investor.company_activity')
+                @component('components.registration.investor.form.company_activity')
                     
                 @endcomponent
-                @component('components.registration.investor.investor_declaration')
+                @component('components.registration.investor.form.investor_declaration')
                     
                 @endcomponent
                 

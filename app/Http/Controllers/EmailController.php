@@ -16,6 +16,8 @@ use App\Mail\MentorRegistrationRecommendationInvitation;
 use App\Mail\MentorRegistrationNotRecommendedNotification;
 use App\Mail\MentorRegistrationTerminatedNotification;
 use App\Mail\MentorRegistrationApprovalInvitation;
+use App\Mail\InvestorRegistrationRecommendationInvitation;
+use App\Mail\InvestorRegistrationApprovalInvitation;
 
 class EmailController extends Controller
 {
@@ -173,6 +175,31 @@ class EmailController extends Controller
             ->later(self::tenSecondDelayTime(), new MentorRegistrationTerminatedNotification($recipient));
     }
  ///////////////////////////////////////////////////////////////////
+
+    /**
+     * Send invitation through email to manager for mentor registration recommendation
+     * @param String $email
+     * @param String $companyEmail
+     * @param Integer $recID
+     */
+    public static function irManagerRecommendation($email, $recipient, $investorName, $url) 
+    {
+        Mail::to([$email])
+            ->later(self::tenSecondDelayTime(), new InvestorRegistrationRecommendationInvitation($recipient, $url, $investorName));
+    }
+
+    /**
+     * Send invitation through email to director for mentor registration recommendation
+     * @param String $email
+     * @param String $companyEmail
+     * @param Integer $recID
+     */
+    public static function irDirectorApproval($email, $recipient, $investorName, $url) 
+    {
+        Mail::to([$email])
+            ->later(self::tenSecondDelayTime(), new InvestorRegistrationApprovalInvitation($recipient, $url, $investorName));
+    }
+ //////////////////////////////////////////////////////////////////
     /**
      * Generate URL for project registration recommendation and approval
      * 

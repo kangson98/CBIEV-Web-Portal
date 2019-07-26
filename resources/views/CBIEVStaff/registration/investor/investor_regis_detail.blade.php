@@ -14,6 +14,9 @@
 @component('components.registration.investor.staff_detail_view.address', ['addresses' => $investorRegis-> addressList])
     
 @endcomponent
+@component('components.registration.investor.staff_detail_view.status_tracking', ['investorRegis' => $investorRegis])
+    
+@endcomponent
 </div>
 
 @endsection

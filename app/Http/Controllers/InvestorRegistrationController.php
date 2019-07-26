@@ -45,7 +45,7 @@ class InvestorRegistrationController extends Controller
 
         $investorRegistrationID = $investorRegistration-> id;
         // save and attach address to investor registration
-        $registeredAddress = Address::createNewAddress(
+        $registeredAddress = Address::createNewAddress(// registered address
             $request-> registerAddressLine1,
             $request-> registerAddressLine2,
             $request-> registerAddressCity,
@@ -55,7 +55,7 @@ class InvestorRegistrationController extends Controller
         InvestorRegistrationAddressList::newRegisteredAddress($investorRegistrationID, $registeredAddress-> id);
 
         if (!($request-> has('sameAddress')) && $request-> sameAddress != "on") {
-            $businessAddress = Address::createNewAddress(
+            $businessAddress = Address::createNewAddress(// business address
                 $request-> businessAddressLine1,
                 $request-> businessAddressLine2,
                 $request-> businessAddressCity,

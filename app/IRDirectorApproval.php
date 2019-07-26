@@ -9,7 +9,7 @@ class IRDirectorApproval extends Model
 /**
      * Table name for this model
      */
-    protected $table = 'mr_director_approvals';
+    protected $table = 'ir_director_approvals';
 
     /**
     * The primary key associated with the model.
@@ -76,5 +76,29 @@ class IRDirectorApproval extends Model
     public function directorApprovalLog()
     {
         return $this->hasMany('App\IRDirectorApprovalLog', 'director_app_id');
+    }
+    // Model Function
+    /**
+     * 
+     */
+    public static function createNewDirectorApproval($statusID, $directorID)
+    {
+        return IRDirectorApproval::create([
+            'recommended_by' => $directorID,
+            'is_recommended' => null,
+            'reason' => null,
+            'comment' => null,
+            'status_tracking_id' => $statusID,
+        ]);      
+    }
+
+    /**
+     * Update recommendation URL
+     */
+    public function updateURL($url)
+    {
+        $this->update([
+            'url' => $url
+        ]);
     }
 }

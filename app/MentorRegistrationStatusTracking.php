@@ -130,6 +130,4 @@ class MentorRegistrationStatusTracking extends Model
     {
         return self::createNewStatus($mentorRegisID, 4);
     }
-
-
 }

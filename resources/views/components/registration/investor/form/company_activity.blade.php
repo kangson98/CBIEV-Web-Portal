@@ -30,7 +30,7 @@
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="companyAttendSession" id="companyAttendSessionNo" value="0">
-            <label class="form-check-label" for="companyAttendSessionYes">No</label>
+            <label class="form-check-label" for="companyAttendSessionNo">No</label>
         </div>
     </div>
 </div>

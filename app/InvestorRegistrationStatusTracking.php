@@ -62,14 +62,14 @@ class InvestorRegistrationStatusTracking extends Model
      */
     public function managerRecommendation()
     {
-        return $this-> hasMany('App\IRManagerRecommendation', 'status_tracking_id');
+        return $this-> hasOne('App\IRManagerRecommendation', 'status_tracking_id');
     }
     /**
      * 
      */
     public function directorApproval()
     {
-        return $this-> hasMany('App\IRDirectorApproval', 'status_tracking_id');
+        return $this-> hasOne('App\IRDirectorApproval', 'status_tracking_id');
     }
 
     // Model Function
@@ -78,7 +78,7 @@ class InvestorRegistrationStatusTracking extends Model
      */
     public static function createNewStatus($investorRegisID, $status)
     {
-        InvestorRegistrationStatusTracking::create([
+        return InvestorRegistrationStatusTracking::create([
             'investor_regis_id' => $investorRegisID,
             'investor_registration_status' => $status
         ]);
@@ -89,6 +89,30 @@ class InvestorRegistrationStatusTracking extends Model
      */
     public static function newRegisteredStatus($investorRegisID)
     {
-        self::createNewStatus($investorRegisID, 0);
+        return self::createNewStatus($investorRegisID, 0);
+    }
+
+    /**
+     * 
+     */
+    public static function newManagerRecommendationStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 1);
+    }
+
+    /**
+     * 
+     */
+    public static function newDirectorApprovalStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 2);
+    }
+
+    /**
+     * Create new mentor status with terminated
+     */
+    public static function newTerminatedStatus($mentorRegisID)
+    {
+        return self::createNewStatus($mentorRegisID, 3);
     }
 }

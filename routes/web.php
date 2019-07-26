@@ -69,7 +69,7 @@ Route::prefix('staff')->group(function(){
         Route::prefix('investor')->group(function(){
             Route::get('/', 'Registration\StaffInvestorRegistrationController@showInvestorRegistrationList')->name('investor.registration.list');
             Route::get('{id}', 'Registration\StaffInvestorRegistrationController@showInvestorRegistrationDetail')->name('investor.registration.detail');
-            Route::post('start/approval/{id}/{stage}','ProjectRegistrationStatusTrackingController@startApprovalProcess')->name('investor.regisration.approval.start');
+            Route::post('start/approval/{id}/{stage}','InvestorRegistrationStatusTrackingController@startApprovalProcess')->name('investor.regisration.approval.start');
         });
     });
 });
@@ -144,6 +144,7 @@ Route::get('/test2', function(){
     return view('form.registration.investor.investor_registration_form');
 });
 
+// project
 Route::get('/project/rec/{type}/{recID}','RecommendationController@projectRecommendation')->name('project.recommendation.get');
 Route::post('/project/rec/post','RecommendationController@saveRecommendation')->name('project.recommendation.post');
 
@@ -152,7 +153,7 @@ Route::post('/project/rec/manager/post','RecommendationController@saveRecommenda
 
 Route::get('/project/app/director/{recID}','PRDirectorApprovalController@showApprovalForm')->name('project.approval.get');
 Route::post('/project/app/director/post','PRDirectorApprovalController@saveApproval')->name('project.approval.post');
-
+// mentor
 Route::get('/mentor/rec/{recID}','MRDeanHeadRecommendationController@showRecommendationForm')->name('mentor.recommendation.dean.head.get');
 Route::post('/mentor/rec/post','MRDeanHeadRecommendationController@saveRecommendation')->name('mentor.recommendation.dean.head.post');
 
@@ -161,3 +162,9 @@ Route::post('/mentor/rec/manager/post','MRManagerRecommendationController@saveRe
 
 Route::get('/mentor/app/director/{recID}','MRDirectorApprovalController@showApprovalForm')->name('mentor.approval.get');
 Route::post('/mentor/app/director/post','MRDirectorApprovalController@saveApproval')->name('mentor.approval.post');
+// investor
+Route::get('/investorRegis/rec/manager/{recID}','IRManagerRecommendationController@showRecommendationForm')->name('investor.recommendation.manager.get');
+Route::post('/investorRegis/rec/manager/post','IRManagerRecommendationController@saveRecommendation')->name('investor.recommendation.manager.post');
+
+Route::get('/investorRegis/app/director/{appID}','IRDirectorApprovalController@showApprovalForm')->name('investor.approval.get');
+Route::post('/investorRegis/app/director/post','IRDirectorApprovalController@saveApproval')->name('investor.approval.post');

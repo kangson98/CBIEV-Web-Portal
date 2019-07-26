@@ -59,7 +59,7 @@ class MRManagerRecommendationLog extends Model
      */
     public function managerRecommendation()
     {
-        return $this->hasMany('App\MRManagerRecommendation', 'manager_rec_id');
+        return $this->belongsTo('App\MRManagerRecommendation', 'manager_rec_id');
     }
 
     // Model Function

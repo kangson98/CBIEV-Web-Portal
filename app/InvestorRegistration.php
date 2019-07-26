@@ -78,6 +78,22 @@ class InvestorRegistration extends Model
     {
         return $this->hasMany('App\InvestorRegistrationAddressList', 'investor_regis_id');
     }
+    /**
+     * Get the Change Log associate with the investor registration
+     * 
+     */
+    public function changeLog()
+    {
+        return $this-> hasMany('App\InvestorRegistrationChangeLog', 'investor_registration_id');
+    }
+    /**
+     * Get the status tracking associate with the investor registration
+     * 
+     */
+    public function statusTracking()
+    {
+        return $this->hasMany('App\InvestorRegistrationStatusTracking', 'investor_regis_id');
+    }
 
     // Model Function
     /**

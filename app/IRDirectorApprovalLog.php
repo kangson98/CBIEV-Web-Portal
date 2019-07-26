@@ -59,6 +59,66 @@ class IRDirectorApprovalLog extends Model
      */
     public function directorApproval()
     {
-        return $this->hasMany('App\IRDirectorApproval', 'director_app_id');
+        return $this->belongsTo('App\IRDirectorApproval', 'director_app_id');
+    }
+
+        // Model Function
+    /**
+     * Create a new log
+     * 
+     * @param int $id
+     */
+    public static function createNewLog($recID, $status)
+    {
+        IRDirectorApprovalLog::create([
+            'director_app_id' => $recID,
+            'status' => $status
+        ]);
+    }
+
+    /**
+     * Create a new log with status 0 = 'notified' 
+     * 
+     * @param int $id
+     */
+    public static function createNewNotifiedLog($recID)
+    {
+        self::createNewLog($recID, 0);
+    }
+    /**
+     * Create a new log with status 1 = 'completed with recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteRecommendedLog($recID)
+    {
+        self::createNewLog($recID, 1);
+    }
+    /**
+     * Create a new log with status 0 = 'completed with not recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteNotRecommendedLog($recID)
+    {
+        self::createNewLog($recID, 2);
+    }
+    /**
+     * Create a new log with status 1 = 'completed with recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteAgreeLog($recID)
+    {
+        self::createNewLog($recID, 3);
+    }
+    /**
+     * Create a new log with status 0 = 'completed with not recommended' 
+     * 
+     * @param int $id
+     */
+    public static function createNewCompleteNotAgreeLog($recID)
+    {
+        self::createNewLog($recID, 4);
     }
 }

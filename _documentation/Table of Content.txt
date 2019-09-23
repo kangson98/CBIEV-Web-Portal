@@ -1,0 +1,34 @@
+1.	Introduction
+1.1.	Purpose of the document
+1.2.	Scope
+
+2.	System Overview
+2.1.	System Characteristics
+2.2.	System Architecture
+2.3.	System Requirement
+	3.3.1	Hardware
+	3.3.2	Software		
+
+3.	System Design Consideration
+3.1.	Assumptions
+3.2.	Constraints
+3.3.	Risks
+3.4.	Strategies
+
+4.	System Design Standard
+4.1.	Documentation Standards
+4.2.	Naming Conventions 
+4.3.	Programming Standards
+
+5.	System Software Detail
+5.1.	Software Architecture
+5.2.	Functional Requirement
+5.3.	Non-Functional Requirement
+5.4.	Software Detail Design
+5.5.	Database Design
+
+6.	Future Upgrade/Consideration 
+
+7.	Development Environment
+
+8.	History Revision

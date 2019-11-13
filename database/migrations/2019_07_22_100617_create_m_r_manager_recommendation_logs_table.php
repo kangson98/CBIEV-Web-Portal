@@ -17,7 +17,7 @@ class CreateMRManagerRecommendationLogsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('manager_rec_id');
             $table->foreign('manager_rec_id')->references('id')->on('mr_manager_recommendations');
-            $table->unsignedTinyInteger('status')->default(0);// 0 = notify, 1 = complate with recomended, 2 = completed with not recommended, 3 = auto approved 
+            $table->unsignedTinyInteger('status')->default(0);// 0 = notify, 1 = completed with recomended, 2 = completed with not recommended
             $table->timestamps();
         });
     }

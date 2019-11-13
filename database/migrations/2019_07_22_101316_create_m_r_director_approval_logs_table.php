@@ -17,7 +17,7 @@ class CreateMRDirectorApprovalLogsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('director_app_id');
             $table->foreign('director_app_id')->references('id')->on('mr_director_approvals');
-            $table->unsignedTinyInteger('status')->default(0);// 0 = notify, 1 = complate with approved, 2 = completed with rejected 
+            $table->unsignedTinyInteger('status')->default(0);// 0 = notify, 1 = completed with approved, 2 = completed with rejected 
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ class CreateMRDeanHeadRecommendationLogsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('dean_head_rec_id');
             $table->foreign('dean_head_rec_id')->references('id')->on('mr_dean_head_recommendations');
-            $table->unsignedTinyInteger('status')->default(0);// 0 = notify, 1 = complate with recomended, 2 = completed with not recommended, 3 = auto approved 
+            $table->unsignedTinyInteger('status')->default(0);// 0 = notify, 1 = completed with recomended, 2 = completed with not recommended, 3 = auto approved 
             $table->timestamps();
         });
     }

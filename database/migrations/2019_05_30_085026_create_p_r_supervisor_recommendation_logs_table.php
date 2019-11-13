@@ -19,6 +19,12 @@ class CreatePRSupervisorRecommendationLogsTable extends Migration
             $table->foreign('pr_sup_rec_id')->references('id')->on('pr_supervisor_recommendations');
             $table->timestamp('completed_at');
             $table->timestamps();
+            /**
+             * 0 = submited
+             * 1 = supervisor recommendation
+             * 2 = dean/head recommendation
+             * 5 = rejected
+             */
         });
     }
 

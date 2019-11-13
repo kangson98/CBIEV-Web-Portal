@@ -1,5 +1,5 @@
 @component('mail::message')
-# Mentor Registration Recommendation Invitation
+# Investor Registration Recommendation Invitation
 Dear, {{ $recipient }}
     You have been invited to recommend this Investor Registration.
 

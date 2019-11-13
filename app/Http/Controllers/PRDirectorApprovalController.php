@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\PRDirectorApproval;
 use App\CBIEVStaff;
+use Illuminate\Support\Facades\Crypt;
+
 use App\Jobs\CreateNewProject;
 
 class PRDirectorApprovalController extends Controller
@@ -12,10 +14,10 @@ class PRDirectorApprovalController extends Controller
     /**
      * 
      */
-    public static function newApproval($statusID)
+    public static function newApproval($statusID, $directorID)
     {
         $directorApproval = new PRDirectorApproval();
-        $directorApproval-> approved_by = CBIEVStaff::where('role', '3')->first()-> id;
+        $directorApproval-> approved_by = $directorID;
         $directorApproval-> is_recommended = null;
         $directorApproval-> comment = null;
         $directorApproval-> is_completed = 0;
@@ -39,7 +41,10 @@ class PRDirectorApprovalController extends Controller
      */
     public function saveApproval(Request $request)
     {
-        $app = PRDirectorApproval::find();
+        $dec = Crypt::decrypt($request-> recID);
+        $dec2 = Crypt::decrypt($dec);
+
+        $app = PRDirectorApproval::find($dec2);
         $app-> approval = $request-> is_recommended;
         $app-> comment = $request-> comment;
         if ($request-> approval == 1) {

@@ -82,7 +82,7 @@ class RecommendationController extends Controller
                 $prDeanHeadRec = PRDeanHeadRecommendation::find($decryptedRecID);
                 $this-> checkRecommendationIsCompleted($prDeanHeadRec);
                 $prDeanHeadRec-> comment = $request-> recommendationComment;
-                $prSupRec-> is_recommended = $request-> recommendation;
+                $prDeanHeadRec-> is_recommended = $request-> recommendation;
                 $prDeanHeadRec-> completed_at =  Carbon::now();
                 $prDeanHeadRec-> is_completed = $this-> checkRecommendation($request-> recommendation);
                 $prDeanHeadRec-> save();
@@ -92,7 +92,7 @@ class RecommendationController extends Controller
                 $prManager = PRManagerRecommendation::find($decryptedRecID);
                 $this-> checkRecommendationIsCompleted($prManager);
                 $prManager-> comment = $request-> recommendationComment;
-                $prSupRec-> is_recommended = $request-> recommendation;
+                $prManager-> is_recommended = $request-> recommendation;
                 $prManager-> is_completed = $this-> checkRecommendation($request-> recommendation);
                 $prManager-> completed_at = Carbon::now();
                 $prManager-> save();

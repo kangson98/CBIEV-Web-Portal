@@ -177,7 +177,7 @@ class EmailController extends Controller
  ///////////////////////////////////////////////////////////////////
 
     /**
-     * Send invitation through email to manager for mentor registration recommendation
+     * Send invitation through email to manager for investor registration recommendation
      * @param String $email
      * @param String $companyEmail
      * @param Integer $recID
@@ -189,7 +189,7 @@ class EmailController extends Controller
     }
 
     /**
-     * Send invitation through email to director for mentor registration recommendation
+     * Send invitation through email to director for investor registration recommendation
      * @param String $email
      * @param String $companyEmail
      * @param Integer $recID

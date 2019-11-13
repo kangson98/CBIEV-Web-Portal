@@ -33,17 +33,21 @@
                             <p>
                                 Dean/Head Recommendation -
                                 @php
-                                    $log = $mentorRegis-> statusTracking-> where('mentor_registration_status', 2)->first()-> deanHeadRecommendation-> deanHeadRecommendationLog-> sortByDesc('created_at')-> first()
+ 
+                                    $log = $mentorRegis-> statusTracking-> where('mentor_registration_status', 2)->first()-> deanHeadRecommendation->first()-> deanHeadRecommendationLog-> sortByDesc('created_at')-> first()
                                 @endphp
                                 @switch($log-> status)
                                     @case(0)
-                                        Director notified at <u>{{$log-> created_at}}</u>
+                                        Dean Head notified at <u>{{$log-> created_at}}</u>
                                         @break
                                     @case(1)
                                         Complete at <u>{{$log-> created_at}}</u> with <strong>RECOMMENDED</strong>
                                         @break
                                     @case(2)
                                         Complete at <u>{{$log-> created_at}}</u> with <strong>NOT RECOMMENDED</strong>
+                                        @break
+                                    @case(5)
+                                        <strong>AUTO APPROVED</strong> at <u>{{$log-> created_at}}</u>
                                         @break
                                     @default
                                         N/A
@@ -60,7 +64,7 @@
                                 @endphp
                                 @switch($log-> status)
                                     @case(0)
-                                        Director notified at <u>{{$log-> created_at}}</u>
+                                        Manager notified at <u>{{$log-> created_at}}</u>
                                         @break
                                     @case(1)
                                         Complete at <u>{{$log-> created_at}}</u> with <strong>RECOMMENDED</strong>
@@ -79,7 +83,7 @@
                             <p>
                                 Director Approval -
                                 @php
-                                    $log = $mentorRegis-> statusTracking-> where('mentor_registration_status', 2)->first()-> directorApproval-> directorApprovalLog-> sortByDesc('created_at')-> first()
+                                    $log = $mentorRegis-> statusTracking-> where('mentor_registration_status', 3)->first()-> directorApproval-> first()-> directorApprovalLog-> sortByDesc('created_at')-> first()
                                 @endphp
                                 @switch($log-> status)
                                     @case(0)

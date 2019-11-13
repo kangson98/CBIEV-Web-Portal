@@ -451,14 +451,43 @@ export default {
     },
     checkFaculty(index){
       if(this.members[index].memberUCID.length >= 4 && this.members[index].memberUCID.length == 4 && this.members[index].memberType == 1){
+        if (this.members[index].memberUCID.charAt(3) == 'P' || this.members[index].memberUCID.charAt(3) == 'p') {
+          this.members[index].memberDepartment= "Centre for Postgraduate Studies and Research";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
+        if (this.members[index].memberUCID.charAt(3) == 'R' || this.members[index].memberUCID.charAt(3) == 'r') {
+          this.members[index].memberDepartment= "Centre for Pre-University Studies";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
+        if (this.members[index].memberUCID.charAt(3) == 'B' || this.members[index].memberUCID.charAt(3) == 'b') {
+          this.members[index].memberDepartment= "Facuty of Accounting, Finance and Business";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
+        if (this.members[index].memberUCID.charAt(3) == 'K' || this.members[index].memberUCID.charAt(3) == 'k') {
+          this.members[index].memberDepartment= "Facuty of Communication and Creative Industries";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
+        if (this.members[index].memberUCID.charAt(3) == 'L' || this.members[index].memberUCID.charAt(3) == 'l') {
+          this.members[index].memberDepartment= "Facuty of Applied Science";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
+        if (this.members[index].memberUCID.charAt(3) == 'V' || this.members[index].memberUCID.charAt(3) == 'v') {
+          this.members[index].memberDepartment= "Facuty of Build Envionment";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
         if (this.members[index].memberUCID.charAt(3) == 'M' || this.members[index].memberUCID.charAt(3) == 'm') {
           this.members[index].memberDepartment= "Facuty of Computing and Information Technology";
           this.members[index].memberDepartmentCode = 'focs'
         }
-        if (this.members[index].memberUCID.charAt(3) == 'E' || this.members[index].memberUCID.charAt(3) == 'e') {
+        if (this.members[index].memberUCID.charAt(3) == 'G' || this.members[index].memberUCID.charAt(3) == 'g') {
           this.members[index].memberDepartment= "Facuty of Engineering and Technology";
           this.members[index].memberDepartmentCode = 'focs'
         }
+        if (this.members[index].memberUCID.charAt(3) == 'J' || this.members[index].memberUCID.charAt(3) == 'j') {
+          this.members[index].memberDepartment= "Facuty of Social Science and Humanities";
+          this.members[index].memberDepartmentCode = 'focs'
+        }
+
       }else if(this.members[index].memberUCID.length < 4 && this.members[index].memberType == 1){
         this.members[index].memberDepartment= "";
         this.members[index].memberDepartmentCode = ''

@@ -11,12 +11,10 @@ use App\CenterFaculty;
 use App\CBIEVStaff;
 use App\Jobs\PRRecommendationAutoApprove;
 
-use App\ProjectRegistrationChangeLog;
 use App\PRTempAccount;
+use App\MentorRegistration;
 use App\Jobs\SendUpdatedPRNotification;
-use App\MRDeanHeadRecommendation;
 use App\MentorRegistrationStatusTracking;
-use Illuminate\Support\Facades\Hash;
 
 class ProjectRegistrationStatusTrackingController extends Controller
 {
@@ -48,6 +46,8 @@ class ProjectRegistrationStatusTrackingController extends Controller
     }
 
     /**
+     *  To start supervisor recommendation
+     * @param ProjectRegistration $projectRegis
      * 
      */
     public function startSupervisorRecommendation($projectRegis)
@@ -63,6 +63,8 @@ class ProjectRegistrationStatusTrackingController extends Controller
     }
 
     /**
+     *  To start dean/head recommendation
+     * @param UnsignedBigInt $projectRegisID
      * 
      */
     public function startDeanHeadRecommendation($projectRegisID)
@@ -84,8 +86,8 @@ class ProjectRegistrationStatusTrackingController extends Controller
     public function startManagerRecommendation($projectRegisID)
     {
         $statusID = $this-> newStatus($projectRegisID, 3);
-        $managerRecommendationID = PRManagerRecommendationController::newRecommendation($statusID);
         $manager = CBIEVStaff::where('role', 2)-> get()-> first();
+        $managerRecommendationID = PRManagerRecommendationController::newRecommendation($statusID, $manager->id);
         EmailController::managerRecommendation($manager-> email, $managerRecommendationID, $manager-> name);
 
         PRRecommendationAutoApprove::dispatch($statusID)->delay(now()-> addSeconds(100));
@@ -97,8 +99,8 @@ class ProjectRegistrationStatusTrackingController extends Controller
     public function startDirectorApproval($projectRegisID)
     {
         $statusID = $this-> newStatus($projectRegisID, 4);
-        $directorApprovalID = PRDirectorApprovalController::newApproval($statusID);
         $director = CBIEVStaff::where('role', 3)-> get()-> first();
+        $directorApprovalID = PRDirectorApprovalController::newApproval($statusID, $director->id);
         EmailController::directorApproval($director-> email, $directorApprovalID, $director-> name);
 
     }
@@ -147,46 +149,7 @@ class ProjectRegistrationStatusTrackingController extends Controller
 
     public function mailTo()
     {
-        return dd(MentorRegistrationStatusTracking::where('mentor_regis_id', 1)->where('mentor_registration_status', 2)->orderBy('created_at', 'desc')-> first()-> managerRecommendation);
-        $a = MentorRegistrationStatusTracking::find(2)->attributesToArray();
-        // return dd(Hash::make(970303055007));
-        return dd(array_keys(($a[0])));
-        SendUpdatedPRNotification::dispatch(1)->delay(now()-> addSeconds(100));
-
-        // EmailController::reRunProjectRecommendationNotification('a@mail.com', 'b@mail.com', 'Zi Xuan', 2, 'ROCKET VIAl', 1);
-        return 'true';
-        $a = '\App\CBIEVStaff';
-        return dd(
-        $status = $a::find(1));
-        $a = PRTempAccount::findorfail(2);
-        return $a;
-
-        // try {
-        //     PRTempAccount::findorfail(2);
-        //     return 'true';
-        // } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-        //     return 'false';
-        // }
-
-        // return dd(PRTempAccount::findorfail(1));
-        // $sup = ProjectSupervisor::find(1);
-        // $sup-> update([
-        //     'ic' => 1111,
-        //     'contact' => 0222
-        // ]);
-
-        // return dd($sup);
-        // return dd(ProjectRegistration::find(1) ->getTableColumns());
-        // if (strcasecmp ('abc', 'abc')) {
-        //     return 1;
-        // }else{
-        //     return 2;
-        // }
-
-        // return dd(route('project.regisration.approval.start',[1,2]));
-        // return Carbon::now()-> toDateTimeString();
-        $a = new EmailController;
-        $a->managerRecommendation('manager@mail.com', 1, 3);
+        return dd(MentorRegistration::find(2)-> statusTracking-> where('mentor_registration_status', 3)->first()-> directorApproval-> directorApprovalLog-> sortByDesc('created_at')-> first());
     }
 
 

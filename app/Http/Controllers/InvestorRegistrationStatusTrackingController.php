@@ -42,7 +42,7 @@ class InvestorRegistrationStatusTrackingController extends Controller
         
         $managerRecommendation-> updateURL($url);
 
-        EmailController::mrManagerRecommendation($manager-> email, $manager-> name, $investorRegistration-> company_registered_name, $url);
+        EmailController::irManagerRecommendation($manager-> email, $manager-> name, $investorRegistration-> company_registered_name, $url);
 
         IRManagerRecommendationLog::createNewNotifiedLog($managerRecommendationID);
     }

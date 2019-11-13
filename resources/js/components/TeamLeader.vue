@@ -346,12 +346,43 @@ export default {
     },
     checkFaculty(){
       if(this.leaderUCID.length >= 4 && this.leaderUCID.length == 4 && this.leaderType == 1){
+
+
+        if (this.leaderUCID.charAt(3) == 'P' || this.leaderUCID.charAt(3) == 'p') {
+          this.leaderDepartment= "Centre for Postgraduate Studies and Research";
+          this.leaderDepartmentCode = 'focs'
+        }
+        if (this.leaderUCID.charAt(3) == 'R' || this.leaderUCID.charAt(3) == 'r') {
+          this.leaderDepartment= "Centre for Pre-University Studies";
+          this.leaderDepartmentCode = 'focs'
+        }
+        if (this.leaderUCID.charAt(3) == 'B' || this.leaderUCID.charAt(3) == 'b') {
+          this.leaderDepartment= "Facuty of Accounting, Finance and Business";
+          this.leaderDepartmentCode = 'focs'
+        }
+        if (this.leaderUCID.charAt(3) == 'K' || this.leaderUCID.charAt(3) == 'k') {
+          this.leaderDepartment= "Facuty of Communication and Creative Industries";
+          this.leaderDepartmentCode = 'focs'
+        }
+        if (this.leaderUCID.charAt(3) == 'L' || this.leaderUCID.charAt(3) == 'l') {
+          this.leaderDepartment= "Facuty of Applied Science";
+          this.leaderDepartmentCode = 'focs'
+        }
+        if (this.leaderUCID.charAt(3) == 'V' || this.leaderUCID.charAt(3) == 'v') {
+          this.leaderDepartment= "Facuty of Build Envionment";
+          this.leaderDepartmentCode = 'focs'
+        }
         if (this.leaderUCID.charAt(3) == 'M' || this.leaderUCID.charAt(3) == 'm') {
           this.leaderDepartment= "Facuty of Computing and Information Technology";
           this.leaderDepartmentCode = 'focs'
-        }if (this.leaderUCID.charAt(3) == 'E' || this.leaderUCID.charAt(3) == 'e') {
+        }
+        if (this.leaderUCID.charAt(3) == 'G' || this.leaderUCID.charAt(3) == 'g') {
           this.leaderDepartment= "Facuty of Engineering and Technology";
-          this.leaderDepartmentCode = 'foet'
+          this.leaderDepartmentCode = 'focs'
+        }
+        if (this.leaderUCID.charAt(3) == 'J' || this.leaderUCID.charAt(3) == 'j') {
+          this.leaderDepartment= "Facuty of Social Science and Humanities";
+          this.leaderDepartmentCode = 'focs'
         }
       }else if(this.leaderUCID.length < 4 && this.leaderType == 1){
         this.leaderDepartment= "";

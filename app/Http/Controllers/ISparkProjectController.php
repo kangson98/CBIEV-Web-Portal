@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\iSparkProject;
+use App\ProjectRegistration;
 class ISparkProjectController extends Controller
 {
     public static function createNewProject($prID)
     {
         $projectRegistration = ProjectRegistration::find($prID);
+        return dd($projectRegistration);
         $newProject = new iSparkProject();
 
         $newProject-> project_title = $projectRegistration-> project_title;

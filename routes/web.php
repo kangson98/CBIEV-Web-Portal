@@ -15,7 +15,7 @@ use App\Company;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome2');
 });
 Route::get('/test', 'ProgrammeController@func');
 

@@ -11,10 +11,7 @@ use App\CenterFaculty;
 use App\CBIEVStaff;
 use App\Jobs\PRRecommendationAutoApprove;
 
-use App\PRTempAccount;
 use App\MentorRegistration;
-use App\Jobs\SendUpdatedPRNotification;
-use App\MentorRegistrationStatusTracking;
 
 class ProjectRegistrationStatusTrackingController extends Controller
 {

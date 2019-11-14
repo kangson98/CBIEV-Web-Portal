@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PRDirectorApproval;
-use App\CBIEVStaff;
 use Illuminate\Support\Facades\Crypt;
 
 use App\Jobs\CreateNewProject;

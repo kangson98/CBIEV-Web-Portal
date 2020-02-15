@@ -3,11 +3,12 @@
     <div class="col-sm-10">
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="mentorCategory" id="mentorCategoryIn" value="1"  v-on:change="internalMentor">
-            <label class="form-check-label" for="mentorCategoryIn">Internal</label>
+            <label class="form-check-label" for="mentorCategoryIn" title="admin/mentor">Internal</label>
         </div>
+
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="mentorCategory" id="mentorCategoryEx" value="2" v-on:change="externalMentor">
-            <label class="form-check-label" for="mentorCategoryEx">External</label>
+            <label class="form-check-label" for="mentorCategoryEx" title="business/technical">External</label>
         </div>
     </div>
 </div>

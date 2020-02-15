@@ -20,6 +20,7 @@
                             <a href="{{route('mentor.registration.detail', [$mr-> id])}}">{{$mr-> name}}</a>
                         </td>
                         <td>
+                            {{-- {{$mr-> statusTracking-> sortByDesc('created_at')-> first()}} --}}
                             @switch($mr-> statusTracking-> sortByDesc('created_at')-> first()-> mentor_registration_status)
                                 @case(0)
                                 Submited

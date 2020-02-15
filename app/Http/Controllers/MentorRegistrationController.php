@@ -9,6 +9,7 @@ use App\InternalMentorDetail;
 use App\CenterFaculty;
 use App\MentorRegistrationExperience;
 use App\MentorRegistrationStatusTracking;
+use App\Http\Controllers\FileUploadController;
 use Illuminate\Support\Facades\Crypt;
 
 class MentorRegistrationController extends Controller
@@ -41,6 +42,7 @@ class MentorRegistrationController extends Controller
             $companyID = null;
         }
 
+
         // save mentor registration
         $newMentorRegistration = MentorRegistration::createNewMentorRegistration(
             $request-> mentorCategory,
@@ -52,7 +54,14 @@ class MentorRegistrationController extends Controller
             $request-> mentorPosition,
             $request-> mentorCompanyEmail
         );
+
         $newMentorRegistrationID = $newMentorRegistration-> id;
+
+        //save mentor upload file
+        $path = 'mentor_registration/' . $newMentorRegistrationID;
+        
+        $newMentorRegistration->saveUpload(FileUploadController::upload($path, $request-> mentorFile, 'mentor_registration_image.png'));
+        
         // set mentor type sync pivot table
         if($request-> has('mentorTypeBusi') && $request-> mentorTypeBusi == 'on'){// for business mentor
             $newMentorRegistration-> syncMentorTypeBusiness();
@@ -74,7 +83,6 @@ class MentorRegistrationController extends Controller
             $request-> mentoring, 
             $request-> howHearProgram
         );
-
         MentorRegistrationStatusTracking::newRegisteredStatus($newMentorRegistrationID);
         
         // redirect registration summary

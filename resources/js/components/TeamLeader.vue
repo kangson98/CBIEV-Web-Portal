@@ -3,7 +3,7 @@
     <div>
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="leaderType">Leader Type</label>
+          <label for="leaderType">Leader Type</label><span style="color:red">*</span>
           <select
             class="form-control"
             name="leaderType"
@@ -83,7 +83,7 @@
               :disabled="disableHasCompany"
               @change="checkHasCompany($event)"
               v-model="leaderHasCompany"
-              > Has Company?
+              > Own a company?
             </label>
           
           </div>
@@ -346,6 +346,8 @@ export default {
     },
     checkFaculty(){
       if(this.leaderUCID.length >= 4 && this.leaderUCID.length == 4 && this.leaderType == 1){
+
+
         if (this.leaderUCID.charAt(3) == 'P' || this.leaderUCID.charAt(3) == 'p') {
           this.leaderDepartment= "Centre for Postgraduate Studies and Research";
           this.leaderDepartmentCode = 'focs'

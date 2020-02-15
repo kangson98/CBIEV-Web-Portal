@@ -239,4 +239,10 @@ class EmailController extends Controller
     {
         return now()->addSeconds(10);
     }
+
+    public function test() 
+    {
+        Mail::to('test@mail.com')
+            ->later(self::tenSecondDelayTime(), new InvestorRegistrationRecommendationInvitation('$recipient', '$url', '$investorName'));
+    }
 }

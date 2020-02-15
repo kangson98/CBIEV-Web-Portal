@@ -2,7 +2,7 @@
 use App\Programme;
 use App\CenterFaculty;
 use App\Company;
-
+use App\MentorRegistration;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,7 @@ use App\Company;
 
 Route::get('/', function () {
     return view('welcome2');
-})->name('welcome');
+});
 Route::get('/test', 'ProgrammeController@func');
 
 /**
@@ -86,8 +86,8 @@ Route::prefix('registration')->group(function(){
         Route::post('home', 'PRTempAccountController@update')->name('pr.temp.registration.update');
         Route::get('updateComplete', 'PRTempAccountController@updateComplete')->name('pr.temp.update.complete');
     });
-
-    Route::prefix('isparkmentor')->group(function(){
+   
+Route::prefix('isparkmentor')->group(function(){   
         Route::get('', 'MentorRegistrationController@showRegistrationForm')->name('mentor.registration.show');
         Route::post('', 'MentorRegistrationController@saveRegistration')->name('mentor.registration.submit');
         Route::post('/terminate/{id}', 'MentorRegistrationController@terminateRegistration')->name('mentor.registration.terminate');
@@ -110,9 +110,7 @@ Route::prefix('registration')->group(function(){
  * Add route tied to staff prefix into this route group
  */
 Route::prefix('get')->group(function(){
-        Route::get('/programmes', function(){
-            return Programme::all()->pluck('programme_name');
-        })->name('get.programme');
+        Route::get('/programmes/{faculty}/{level}', 'ProjectMemberController@getProgramme');
         Route::get('/department', function(){
             return CenterFaculty::all()->pluck('name');
         })->name('get.department');
@@ -132,7 +130,13 @@ Route::get('/investor', function(){
     return view('form.registration.investor.investor_registration_form');
 });
 Route::get('/test', function(){
-    
+    $centerFaculty = CenterFaculty::all()-> only('id', 'name', 'code');
+
+    foreach ($centerFaculty as $name => $id) {
+        echo $name . ' has id ' . $id . "\r\n";
+        echo "<br>";
+    }
+    return dd($centerFaculty);
 });
 Route::get('/test2', function(){
     return view('form.registration.investor.investor_registration_form');
@@ -162,3 +166,6 @@ Route::post('/investorRegis/rec/manager/post','IRManagerRecommendationController
 
 Route::get('/investorRegis/app/director/{appID}','IRDirectorApprovalController@showApprovalForm')->name('investor.approval.get');
 Route::post('/investorRegis/app/director/post','IRDirectorApprovalController@saveApproval')->name('investor.approval.post');
+
+
+Route::get('test33', 'EmailController@test');

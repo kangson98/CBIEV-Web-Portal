@@ -102,7 +102,7 @@
               :disabled="supervisor.disableHasCompany"
               @change="checkHasCompany($event, index)"
               v-model="supervisor.supervisorHasCompany"
-              > Has Company?
+              > Own a company?
             </label>
           </div>
         <input type="hidden" name="supervisorHasCompany[]" v-model="supervisor.supervisorHasCompany">

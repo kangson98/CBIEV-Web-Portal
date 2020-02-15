@@ -26,8 +26,6 @@ class StaffMentorRegistrationController extends Controller
      */
     public function showMentorRegistrationDetail($id)
     {
-        // return dd(MentorRegistration::find($id)-> statusTracking-> where('mentor_registration_status', 2)->first()-> deanHeadRecommendation);
-        // return dd(MentorRegistration::find($id)-> statusTracking-> where('mentor_registration_status', 2)->first()-> deanHeadRecommendation->first()-> deanHeadRecommendationLog-> sortByDesc('created_at')-> first());
         return view('CBIEVStaff.registration.mentor.mentor_regis_detail')->with('mentorRegis', MentorRegistration::find($id));
     }
 }

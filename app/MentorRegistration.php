@@ -169,5 +169,10 @@ class MentorRegistration extends Model
         }
     }
 
+    public function saveUpload($path){
+        $this->image = $path;
+        $this->save();
+    }
+
 
 }

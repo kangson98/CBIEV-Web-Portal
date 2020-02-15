@@ -5,6 +5,7 @@
     <div class="m-3">
         <div class="text-center mp-3">
             <h4 class="display-4 form-title">iSpark Investor Registration Form</h4>
+            <h4 class="display-4 form-title">---------------------------------------------</h4>
         </div>
         <div class="mtb-5 ">
             <form action="{{route('investor.registration.submit')}}" method="post">

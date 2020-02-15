@@ -20,6 +20,7 @@ class CreateMentorRegistrationChangeLogsTable extends Migration
             $table->string('column_name');
             $table->string('old_value');
             $table->string('new_value');
+            $table->string('image_name');
             $table->timestamps();
         });
     }

@@ -34,7 +34,7 @@
                                 Dean/Head Recommendation -
                                 @php
  
-                                    $log = $mentorRegis-> statusTracking-> where('mentor_registration_status', 1)->first()-> deanHeadRecommendation->first()-> deanHeadRecommendationLog-> sortByDesc('crea2ted_at')-> first()
+                                    $log = $mentorRegis-> statusTracking-> where('mentor_registration_status', 1)->first()-> deanHeadRecommendation->first()-> deanHeadRecommendationLog-> sortByDesc('created_at')-> first()
                                 @endphp
                                 @switch($log-> status)
                                     @case(0)

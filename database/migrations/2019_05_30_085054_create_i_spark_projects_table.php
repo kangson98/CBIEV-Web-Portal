@@ -14,7 +14,7 @@ class CreateISparkProjectsTable extends Migration
     public function up()
     {
         Schema::create('i_spark_projects', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->nullable();
             $table->string('project_title')->nullable();
             $table->text('problem_statement')->nullable();
             $table->text('proposed_solution')->nullable();

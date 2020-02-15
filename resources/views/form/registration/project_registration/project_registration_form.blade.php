@@ -12,7 +12,7 @@
         </div>
         <form method="POST" action="{{route('project.registration.submit')}}" name="regisForm" id="regisForm">
             {{ csrf_field() }}
-            <div class=" text-center" style="margin-top:1rem;">
+            <div class=" text`-center" style="margin-top:1rem;">
                 <div><strong>Project Information</strong></div>
             </div>
             <div class="form-row">

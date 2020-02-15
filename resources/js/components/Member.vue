@@ -102,7 +102,7 @@
               id="memberHasCompany"
               :disabled="member.disableHasCompany"
               @change="checkHasCompany($event, index)"
-              > Has Company?
+              > Own a company?
             </label>
           </div>
         <input type="hidden" name="memberHasCompany[]" v-model="member.memberHasCompany">
@@ -170,9 +170,10 @@
             id="memberUCID"  
             :readonly="member.disableUCID"
             v-model="member.memberUCID"
-            v-on:keyup="checkFaculty(index)"
             @change="checkFaculty(index)"
           >
+            <!-- v-on:keyup="checkFaculty(index)" -->
+
         </div>
         <div class="form-group col-md-6">
           <label for="memberDepartment">Department/Center/Faculty</label>
@@ -195,7 +196,7 @@
           <multiselect 
           id="memberProgramme"
           name="memberProgramme[]"
-          :options="options" 
+          :options="member.memberProgrammeList" 
           :disabled="member.disablePrograme"
           v-model="member.memberProgramme"></multiselect>
           <span>
@@ -235,6 +236,7 @@ export default {
           memberUCID: "",
           memberDepartment: "",
           memberProgramme: "",
+          memberProgrammeList: [],
           memberDepartmentCode: "",
 
           disableName: true,
@@ -257,7 +259,6 @@ export default {
       ],
       placeholder: '',
       participantIndex: 1,
-
     };
   },
   methods: {
@@ -313,6 +314,7 @@ export default {
         this.members[index].disableCompanyEmail= false;
 
         this.members[index].memberHasCompany = true;
+
 
         this.members[index].mailText = 'TAR UC Email';
         this.members[index].idText = 'Student ID';
@@ -407,6 +409,7 @@ export default {
         this.members[index].memberUCID= "N/A";
         this.members[index].memberDepartment= "N/A";
         this.members[index].memberProgramme= "N/A";
+
       }
     },
     addMember() {
@@ -450,8 +453,7 @@ export default {
     checkFaculty(index){
       if(this.members[index].memberUCID.length >= 4 && this.members[index].memberUCID.length == 4 && this.members[index].memberType == 1){
         if (this.members[index].memberUCID.charAt(3) == 'P' || this.members[index].memberUCID.charAt(3) == 'p') {
-          this.members[index].memberDepartment= "Centre for Postgraduate Studies and Research";
-          this.members[index].memberDepartmentCode = 'focs'
+          
         }
         if (this.members[index].memberUCID.charAt(3) == 'R' || this.members[index].memberUCID.charAt(3) == 'r') {
           this.members[index].memberDepartment= "Centre for Pre-University Studies";
@@ -491,6 +493,8 @@ export default {
         this.members[index].memberDepartmentCode = ''
       }
 
+      
+
       if(this.members[index].memberType == 3){
         this.members[index].memberDepartment= "Alumni";
         this.members[index].memberDepartmentCode = 'alumni'
@@ -498,6 +502,44 @@ export default {
         this.members[index].memberDepartment= "N/A";
         this.members[index].memberDepartmentCode = 'public'
       }
+
+      //continue here
+    //url = getprog + faculty id code & lvl code
+
+    if (this.members[index].memberUCID.length == 10) {
+
+      // seperator
+
+      switch (this.members[index].memberUCID.charAt(3)) {
+        case 'P':
+        case 'p':
+          this.members[index].memberDepartment= "Centre for Postgraduate Studies and Research";
+          this.members[index].memberDepartmentCode = 'cpsr'
+          break;
+        case 'M':
+        case 'm':
+          this.members[index].memberDepartment= "Faculty of Computing and Information Technology";
+          this.members[index].memberDepartmentCode = 'focs'
+          break;
+
+        default:
+          this.members[index].memberDepartment= "";
+          this.members[index].memberDepartmentCode = ''
+          break;
+      }
+      // seperator 
+      // faculty = this.members[index].memberUCID.charAt(4)
+      // level = this.members[index].memberUCID.charAt(5)
+
+      axios
+          .get('/get/programmes/' + this.members[index].memberUCID.charAt(3) + '/' + this.members[index].memberUCID.charAt(4))
+          .then(
+            response => (this.members[index].memberProgrammeList = response.data)
+          );
+    }else {
+      this.members[index].memberProgrammeList = []
+    }
+
     },
     checkHasCompany(e, index){
       if(e.target.checked == true){

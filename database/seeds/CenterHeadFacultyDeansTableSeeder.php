@@ -67,7 +67,104 @@ class CenterHeadFacultyDeansTableSeeder extends Seeder
             //     'email' => 'leewp@tarc.edu.my',
             //     'name' => 'Lee Wah Pheng',
             //     'is_active' => '0'
-            // ],
+            // ],            
+            [
+                'faculty_center_id' => '1',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'bursary',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '2',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'cbiev',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '3',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'cpe',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '4',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'cpsr',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '5',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'cpus',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '6',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'citc',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '7',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dace',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '8',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dar',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '9',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'ccm',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '10',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dem',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '11',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'deca',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '12',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dhr',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '13',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'diso',
+                'is_active' => '1'
+            ],
+
+            [
+                'faculty_center_id' => '14',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dqa',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '15',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dos',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '16',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'dsa',
+                'is_active' => '1'
+            ],
             [
                 'faculty_center_id' => '17',
                 'email' => 'tanzx-wa15@student.tarc.edu.my',
@@ -83,25 +180,25 @@ class CenterHeadFacultyDeansTableSeeder extends Seeder
             [
                 'faculty_center_id' => '19',
                 'email' => 'zxtan97@hotmail.com',
-                'name' => 'focs',
+                'name' => 'fobe',
                 'is_active' => '1'
             ],
             [
                 'faculty_center_id' => '20',
                 'email' => 'zxtan97@hotmail.com',
-                'name' => 'fobe',
+                'name' => 'fcci',
                 'is_active' => '1'
             ],
             [
                 'faculty_center_id' => '21',
                 'email' => 'zxtan97@hotmail.com',
-                'name' => 'foet',
+                'name' => 'focs',
                 'is_active' => '1'
             ],
             [
                 'faculty_center_id' => '22',
                 'email' => 'zxtan97@hotmail.com',
-                'name' => 'fcci',
+                'name' => 'foet',
                 'is_active' => '1'
             ],
             [
@@ -111,15 +208,27 @@ class CenterHeadFacultyDeansTableSeeder extends Seeder
                 'is_active' => '1'
             ],
             [
-                'faculty_center_id' => '4',
+                'faculty_center_id' => '24',
                 'email' => 'zxtan97@hotmail.com',
-                'name' => 'cpus',
+                'name' => 'lib',
                 'is_active' => '1'
             ],
             [
-                'faculty_center_id' => '5',
+                'faculty_center_id' => '25',
                 'email' => 'zxtan97@hotmail.com',
-                'name' => 'cpsr',
+                'name' => 'oc',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '26',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'op',
+                'is_active' => '1'
+            ],
+            [
+                'faculty_center_id' => '27',
+                'email' => 'zxtan97@hotmail.com',
+                'name' => 'reg',
                 'is_active' => '1'
             ],
 

@@ -5,16 +5,16 @@
     <label for="mentorCategory" class="col-sm-4 col-form-label">Have you had experience in Mentoring before</label>
     <div class="col-sm-8">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="mentorHasExp" id="mentorHasExpYes" value="1">
+            <input class="form-check-input" type="radio" name="mentorHasExp" id="mentorHasExpYes" value="1" @click="unhide">
             <label class="form-check-label" for="mentorHasExpYes">Yes</label>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="mentorHasExp" id="mentorHasExpNo" value="0">
+        <div class="form-check form-check-inline" >
+            <input class="form-check-input" type="radio" name="mentorHasExp" id="mentorHasExpNo" value="0" @click="hide">
             <label class="form-check-label" for="mentorHasExpNo">No</label>
         </div>
     </div>
 </div>
-<div class="form-row m-2">
+<div class="form-row m-2" v-if="seen">
         <label for="mentorExpText">If you <strong>had</strong> experience, please state the type of mentoring capabilities or skills you would like to provide?<br>
             If you <strong>have not</strong> officially mentor before, what experience do you have that lends yourself to mentoring?<span style="color:red"> *</span></label>
         <textarea class="form-control" id="mentorExpText" name="mentorExpText" cols="30" rows="5" value="">{{ old('mentorExpText')}}</textarea>

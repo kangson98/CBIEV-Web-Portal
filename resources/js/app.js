@@ -59,6 +59,7 @@ const app = new Vue({
             'mentorOfficialEmailDisable': true,
             'internalMentorCompanyRegNo': '1033820M',
             'internalMentorCompanyName': 'Tunku Abdul Rahman University College',
+            'seen' : true
         }
     },
     methods:{
@@ -121,6 +122,12 @@ const app = new Vue({
                 }
             }
             
-        }
+        },
+        hide(){
+            this.seen = false
+        },
+        unhide(){
+            this.seen = true
+        },
     }
 });

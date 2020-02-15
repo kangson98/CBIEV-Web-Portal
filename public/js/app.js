@@ -64266,7 +64266,8 @@ var app = new Vue({
       'mentorDepartmentDisable': true,
       'mentorOfficialEmailDisable': true,
       'internalMentorCompanyRegNo': '1033820M',
-      'internalMentorCompanyName': 'Tunku Abdul Rahman University College'
+      'internalMentorCompanyName': 'Tunku Abdul Rahman University College',
+      'seen': true
     };
   },
   methods: {
@@ -64322,6 +64323,12 @@ var app = new Vue({
           this.mentorDepartmentDisable = true;
         }
       }
+    },
+    hide: function hide() {
+      this.seen = false;
+    },
+    unhide: function unhide() {
+      this.seen = true;
     }
   }
 });
@@ -64684,8 +64691,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\PC-2\Desktop\CWP\CBIEV-Web-Portal\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\PC-2\Desktop\CWP\CBIEV-Web-Portal\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\TARUC\Desktop\New folder (2)\CBIEV-Web-Portal-master\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\TARUC\Desktop\New folder (2)\CBIEV-Web-Portal-master\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

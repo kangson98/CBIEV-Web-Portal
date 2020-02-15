@@ -16,7 +16,7 @@ use App\Company;
 
 Route::get('/', function () {
     return view('welcome2');
-});
+})->name('welcome');
 Route::get('/test', 'ProgrammeController@func');
 
 /**
@@ -132,13 +132,7 @@ Route::get('/investor', function(){
     return view('form.registration.investor.investor_registration_form');
 });
 Route::get('/test', function(){
-    $centerFaculty = CenterFaculty::all()-> only('id', 'name', 'code');
-
-    foreach ($centerFaculty as $name => $id) {
-        echo $name . ' has id ' . $id . "\r\n";
-        echo "<br>";
-    }
-    return dd($centerFaculty);
+    
 });
 Route::get('/test2', function(){
     return view('form.registration.investor.investor_registration_form');

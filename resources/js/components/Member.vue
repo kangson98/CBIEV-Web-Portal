@@ -314,7 +314,6 @@ export default {
 
         this.members[index].memberHasCompany = true;
 
-
         this.members[index].mailText = 'TAR UC Email';
         this.members[index].idText = 'Student ID';
 
@@ -408,7 +407,6 @@ export default {
         this.members[index].memberUCID= "N/A";
         this.members[index].memberDepartment= "N/A";
         this.members[index].memberProgramme= "N/A";
-
       }
     },
     addMember() {

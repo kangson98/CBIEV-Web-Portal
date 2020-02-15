@@ -4,95 +4,71 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>CBIEV-iSpark</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> --}}
 
         <!-- Styles -->
-        <style>
-            html, body {
-                background-image: url(/background/1);
-                background-color: #6DCFF6;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-            .content {
-            }
-            .login-frame {
-                background-color: #80C342;
-                width: 30rem;
-                height: 10rem;
-                padding: 2rem;
-
-            }
-            .login-ul{
-                display: table-row;
-                width: 100%; 
-                height:auto;
-                list-style-type: none;
-            }
-            .ul {
-                list-style-type: none;
-            }
-            .login-ul li{
-                display:table-cell;
-                margin: 10px;
-                vertical-align: middle;
-            }
-            a.link{
-                display:block; 
-                width:100%; 
-                padding:1px; 
-                text-decoration:none; 
-                text-align:center; 
-                border-style:solid;
-                border-width:3px;
-                border-color:#00b0f0;
-                color:#00b0f0;
-                background-color: #ffffff;
-                border-radius:4px;
-                font-weight: 1000;
-                margin-bottom: 0.5rem
-                }
-            a.link:hover {
-                border-color:#00b0ee;
-                color:#ffffff;
-                background-color: #95b3d7;}
-            }
-        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="login-frame">
-                    {{-- <ul class='login-ul'>
-                        <li><a class="link" href="{{route('staff.login')}}">Staff Login</a></li><br>
-                        <li><a class="link" href="{{route('staff.login')}}">iSpark Project Login</a></li>
-                        <li><a class="link" href="{{route('staff.login')}}">iSpark Participant Login</a></li>
-                    </ul> --}}
-                    <ul class='ul' style="list-style-type: none;">
-                            <li><a class="link" href="{{route('staff.login')}}">Staff Login</a></li><br>
-                            <li><a class="link" href="{{route('staff.login')}}">iSpark Project Login</a></li>
-                            <li><a class="link" href="{{route('staff.login')}}">iSpark Participant Login</a></li>
-                        </ul>
+        <div class="custom-container">
+            <div class="main-box">
+                <div class="logo-box">
+                    <div class="taruc-logo">
+                        <a href="https://www.tarc.edu.my/" target="_blank">
+                            <img src="/storage/images/logo/taruc.png">
+                        </a>
+                    </div>
+                    <div class="cbiev-logo">
+                        <a href="https://www.tarc.edu.my/cbiev/" target="_blank">
+                            <img src="/storage/images/logo/cbiev.png">
+                        </a>
+                    </div>
+                    <div class="ispark-logo">
+                        <a href="#" target="_blank">
+                            <img src="/storage/images/logo/ispark.png">
+                        </a>
+                    </div>
+                </div>
+                <div class="title-box">
+                    <h2><b>CBIEV Web Portal</b></h2>
+                </div>
+                <div class="login-box">
+                    <h5>Member Login</h5>
+                    <ul>
+                        <li>
+                            <a class="button-one" href="{{route('project.registration.login')}}" target="_blank">Project Login</a>
+                        </li>
+                        <li>
+                            <a class="button-one" href="{{route('mentor.temp.registration.login')}}" target="_blank">Investor/Mentor</a>
+                        </li>
+                        <li>
+                            <a class="button-one" href="{{route('staff.login')}}" target="_blank">Staff</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="application-box">
+                    <h5>New Application</h5>
+                    <ul>
+                        <li>
+                            <a class="button-one" href="{{route('project.registration.login')}}" target="_blank">iSpark Project</a>
+                        </li>
+                        <li>
+                            <a class="button-one" href="{{route('mentor.temp.registration.login')}}" target="_blank">iSpark Investor</a>
+                        </li>
+                        <li>
+                            <a class="button-one" href="{{route('staff.login')}}" target="_blank">iSpark Mentor</a>
+                        </li>
+                        <li>
+                            <a class="button-one" href="{{route('staff.login')}}" target="_blank">Co-Working Space</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="disclaimer-box">
+                    @include('components.disclaimer')
                 </div>
             </div>
         </div>

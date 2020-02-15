@@ -44,7 +44,7 @@
                                         @break          
                                 @endswitch
                             </td>
-                            <td>{{$member-> name}}</td>
+                            <td>{{$member-> name}} <textarea name="name" placeholder="insert name" id="memname"></textarea></td>
                             <td>{{$member-> ic}}</td>
                             <td>{{$member-> email}}</td>
                             <td>{{$member-> contact}}</td>

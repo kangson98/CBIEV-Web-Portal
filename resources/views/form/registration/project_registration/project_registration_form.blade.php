@@ -18,7 +18,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="projectTitle">Project Title</label><span style="color:red"> *</span>
-                    <input type="text" id="projectTitle" name="projectTitle" class="form-control" value="{{ old('projectTitle')}}"
+                    <input type="text" id="projectTitle" name="projectTitle" placeholder="Project Title" class="form-control" value="{{ old('projectTitle')}}"
                         autofocus style="text-transform:uppercase">
                     @if ($errors->has('projectTitle'))
                     <div class=" " role="">
@@ -48,7 +48,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="projectDesc">Project Description</label><span style="color:red"> *</span>
-                    <textarea class="form-control" id="projectDesc" name="projectDesc" cols="30" rows="10" value="">{{ old('projectDesc')}}</textarea>
+                    <textarea class="form-control" id="projectDesc" name="projectDesc" placeholder="Project Description" required cols="30" rows="10" value="">{{ old('projectDesc')}}</textarea>
                     <span class="focus-border"></span>
                 </div>
             </div>
@@ -66,7 +66,7 @@
             <member></member>
             <div class="form-row">
                 <div class="form-group col-md-1">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success" required>Submit</button>
                 </div>
                 <div class="form-group col-md-8 offset-md-1">
                     <button type="reset" class="btn btn-light" style="text-decoration:underline; width:5rem">Reset</button>

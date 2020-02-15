@@ -5,7 +5,7 @@
                 Company Address
             </button>
         </div>
-        <div class="collapse" id="companyAddress">
+        <div class="collapse" id="companyAddress" >
             @foreach ($addresses as $address)
             <div class="card-body">
                     <div class="p-2 row">
@@ -21,6 +21,7 @@
                                 {{ $address -> address-> line_2 }}, <br>
                                 {{ $address -> address-> city}}, {{ $address -> address-> zip  }}. <br>
                                 {{ $address -> address-> state }} <br>
+                                
                         </div>
                         <span class="border-bottom "></span>
                     </div>

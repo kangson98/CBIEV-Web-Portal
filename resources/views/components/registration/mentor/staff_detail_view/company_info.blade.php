@@ -8,7 +8,7 @@
     <div class="collapse" id="companyInfo">
         <div class="card-body">
             <div class="p-2 row">
-                <div class="col col-sm-3">Company Name</div>
+                <div class="col col-sm-3">Company Name<span style="color:red">*</span></div>
                 <div class="col col-sm-6">{{ $company -> company_name }}</div>
                 <span class="border-bottom "></span>
             </div>

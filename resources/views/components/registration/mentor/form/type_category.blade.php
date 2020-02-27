@@ -1,5 +1,5 @@
 <div class="form-group row">
-    <label for="mentorCategory" class="col-sm-2 col-form-label">Mentor Category</label>
+    <label for="mentorCategory" class="col-sm-2 col-form-label">Mentor Category<span style="color:red">*</span></label>
     <div class="col-sm-10">
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="mentorCategory" id="mentorCategoryIn" value="1"  v-on:change="internalMentor">
@@ -13,7 +13,7 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="mentorType" class="col-sm-2 col-form-label">Mentor Type</label>
+    <label for="mentorType" class="col-sm-2 col-form-label">Mentor Type<span style="color:red">*</span></label>
     <div class="col-sm-10">
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" name="mentorTypeBusi" id="mentorTypeBusi">

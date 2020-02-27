@@ -1,0 +1,31 @@
+windows: ctrl + alt + R = start record
+
+-------- visual code shortcut ----------------------------------
+visual code: exit search: ctrl + shift + e
+
+------- cbiev info --------------------------
+php artisan serve
+diff port: php artisan serve --port 8001
+
+cbiev staff logins:  password
+
+admin@mail.com
+manager@mail.com
+director@mail.com
+
+- registration form
+==========================================
+iSpark Project
+----------------
+- ispark login/register
+http://127.0.0.1:8000/registration/isparkproject/home
+
+- ispark registration form
+http://127.0.0.1:8000/registration/isparkproject/
+http://127.0.0.1:8000/registration/isparkmentor/
+==========================================
+INVESTOR
+--------------
+- investor registration form
+http://127.0.0.1:8000/investor/
+

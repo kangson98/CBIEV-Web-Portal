@@ -14,6 +14,7 @@ class SuccessProjectRegistrationNotification extends Mailable
     public $recipient;
     public $projectName;
     public $trackingNO;
+    public $url;
 
     /**
      * Create a new notification instance.
@@ -22,6 +23,7 @@ class SuccessProjectRegistrationNotification extends Mailable
      */
     public function __construct($recipient, $projectName, $trackingNO)
     {
+        $this-> url = route('project.registration.login');
         $this-> recipient = $recipient;
         $this-> projectName = $projectName;
         $this-> trackingNO = $trackingNO;

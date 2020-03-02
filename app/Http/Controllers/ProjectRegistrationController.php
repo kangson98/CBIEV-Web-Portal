@@ -104,7 +104,7 @@ class ProjectRegistrationController extends Controller
                 break;
             case 2:// TAR UC Staff
                 $ucID = $request-> leaderUCID;
-                $center_faculty_id =  CenterFaculty::getIDByName($request-> leaderDepartment);
+                $center_faculty_id =  CenterFaculty::getIDByCode($request-> leaderDepartment);
                 $programme = null;
                 break;
             case 3:// Alumni

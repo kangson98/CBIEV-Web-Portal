@@ -15,6 +15,10 @@ class CreateProjectUploadLogsTable extends Migration
     {
         Schema::create('project_upload_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('filename');
+            $table->string('file_url');
+            $table->string('file_path');
+            $table->unsignedBigInteger('project_id');
             $table->timestamps();
         });
     }

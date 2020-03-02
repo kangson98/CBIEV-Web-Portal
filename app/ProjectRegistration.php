@@ -137,6 +137,11 @@ class ProjectRegistration extends Model
     {
         return $this->hasOne('App\PRTempAccount', 'project_registration_id');
     }
+ 
+    public function fileUpload()
+    {
+        return $this->hasMany('App\ProjectUploadLog','project_id', 'id');
+    }
 
     // Eloquent Relationship Function End
 

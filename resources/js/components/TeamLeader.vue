@@ -83,7 +83,7 @@
               :disabled="disableHasCompany"
               @change="checkHasCompany($event)"
               v-model="leaderHasCompany"
-              > Own a company?
+              > Has Company?
             </label>
           
           </div>
@@ -174,7 +174,7 @@
           <label for="leaderProgramme">Programme Study</label>
           <span style="color:red">*</span>
           <multiselect 
-          :options="options" 
+          :options="leaderProgrammeList" 
           :disabled="disablePrograme"
           v-model="leaderProgramme"></multiselect>
           <span>
@@ -214,6 +214,8 @@ export default {
       leaderDepartment: "",
       leaderProgramme: "",
       leaderDepartmentCode: "",
+      leaderProgrammeList: [],
+
 
       disableName: true,
       disableICNo: true,
@@ -345,9 +347,8 @@ export default {
       }
     },
     checkFaculty(){
-      if(this.leaderUCID.length >= 4 && this.leaderUCID.length == 4 && this.leaderType == 1){
-
-
+      
+       if(this.leaderUCID.length >= 4 && this.leaderUCID.length == 4 && this.leaderType == 1){
         if (this.leaderUCID.charAt(3) == 'P' || this.leaderUCID.charAt(3) == 'p') {
           this.leaderDepartment= "Centre for Postgraduate Studies and Research";
           this.leaderDepartmentCode = 'focs'
@@ -384,6 +385,7 @@ export default {
           this.leaderDepartment= "Facuty of Social Science and Humanities";
           this.leaderDepartmentCode = 'focs'
         }
+
       }else if(this.leaderUCID.length < 4 && this.leaderType == 1){
         this.leaderDepartment= "";
         this.leaderDepartmentCode = ''
@@ -396,6 +398,25 @@ export default {
         this.leaderDepartment= "N/A";
         this.leaderDepartmentCode = 'public'
       }
+
+      //continue here
+    //url = getprog + faculty id code & lvl code
+
+    if (this.leaderUCID.length == 10) {
+
+      console.log('test12')
+      // faculty = this.leaderUCID.charAt(4)
+      // level = this.leaderUCID.charAt(5)
+
+      axios
+          .get('/get/programmes/' + this.leaderUCID.charAt(3) + '/' + this.leaderUCID.charAt(4))
+          .then(
+            response => (this.leaderProgrammeList = response.data)
+          );
+    }else {
+      this.leaderProgrammeList = []
+    }
+
     },
     checkHasCompany(e){
       if(e.target.checked == true && this.leaderType == 3 || e.target.checked == true && this.leaderType == 4){

@@ -4,17 +4,16 @@
 <div class="form-group row">
     <label for="mentorCategory" class="col-sm-4 col-form-label">Do you have experience in mentoring entreprenial related project? </label><span style="color:red">*</span>
 
-
     <div class="col-sm-8">
 
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="mentorHasExp" id="mentorHasExpYes" value="1"
-                v-model="selected">
+                @click="hasExp">
             <label class="form-check-label" for="mentorHasExpYes">Yes</label>
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="mentorHasExp" id="mentorHasExpNo" value="0"
-                v-model="selected">
+            @click="hasNoExp">
             <label class="form-check-label" for="mentorHasExpNo">No</label>
         </div>
     </div>
@@ -22,25 +21,16 @@
 
 <div class="form-row m-2">
     <label for="mentorExpText">
-        <div {{-- v-if="selected === 1" --}} >If  <strong>yes</strong>, please state the type of <span
+        <div v-if="mentorHasExpOption">If  <strong>yes</strong>, please state the type of <span
                 title="technical/soft skills"><u>mentoring capabilities or skills (?)</u></span> you would like to provide?
             <span style="color:red"> *</span>
         </div>
         <br>
 
-        <div {{-- v-if="selected === 0"  --}}>If  <strong>no</strong>,
+        <div v-if="mentorNoExpOption">If  <strong>no</strong>,
             please state your capabilities/skills that would lend yourself to mentoring.<span style="color:red"> *</span>
         </div>
     </label>
-    <script>
-        data() {
-            return {
-      // Initially selected will be null
-      // to hide both the div
-      selected: value
-    }
-  }
-    </script>
 
     <textarea class="form-control" id="mentorExpText" name="mentorExpText" cols="30" rows="5"
         value="">{{ old('mentorExpText')}}</textarea>

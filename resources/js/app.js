@@ -12,10 +12,10 @@ window.Vue = require('vue');
  * Import and use vue extensions 
  */
 
-import VeeValidate from 'vee-validate';//https://baianat.github.io/vee-validate/
-import MaskedInput from 'vue-text-mask'//https://github.com/text-mask/text-mask
+// import VeeValidate from 'vee-validate';//https://baianat.github.io/vee-validate/
+// import MaskedInput from 'vue-text-mask'//https://github.com/text-mask/text-mask
 import Axios from 'axios';
-Vue.use(VeeValidate);
+// Vue.use(VeeValidate);
 // https://vue-multiselect.js.org/
 /**
  * The following block of code may be used to automatically register your
@@ -28,7 +28,7 @@ Vue.use(VeeValidate);
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('masked-input', MaskedInput);
+// Vue.component('masked-input', MaskedInput);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('member', require('./components/Member.vue').default);
 Vue.component('supervisor', require('./components/Supervisor.vue').default);
@@ -59,7 +59,9 @@ const app = new Vue({
             'mentorOfficialEmailDisable': true,
             'internalMentorCompanyRegNo': '1033820M',
             'internalMentorCompanyName': 'Tunku Abdul Rahman University College',
-            'seen' : true
+            'seen' : true,
+            'mentorHasExpOption':false,
+            'mentorNoExpOption':false,
         }
     },
     methods:{
@@ -128,6 +130,14 @@ const app = new Vue({
         },
         unhide(){
             this.seen = true
+        },
+        hasExp(){
+            this.mentorHasExpOption = true
+            this.mentorNoExpOption = false
+        },
+        hasNoExp(){
+            this.mentorHasExpOption = false
+            this.mentorNoExpOption = true
         },
     }
 });

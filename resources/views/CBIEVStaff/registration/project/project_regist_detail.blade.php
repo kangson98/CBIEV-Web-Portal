@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container-fluid" >
+    <div>
+        <a href="{{ route('project.file.list', $projectRegis->id)}}">Project File List</a>
+    </div>
     @component('components.registration.project.project_info', ['projectRegis' => $projectRegis])
         
     @endcomponent

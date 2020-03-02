@@ -52,4 +52,9 @@ class iSparkProject extends Model
      * @var array
      */
     protected $attributes = [];
+
+    public function fileUpload()
+    {
+        return $this->hasMany('','');
+    }
 }

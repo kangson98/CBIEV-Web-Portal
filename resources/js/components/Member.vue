@@ -451,29 +451,30 @@ export default {
       this.members.splice(index, 1);
     },
     checkFaculty(index){
-      if(this.members[index].memberUCID.length >= 4 && this.members[index].memberUCID.length == 4 && this.members[index].memberType == 1){
+      if(this.members[index].memberUCID.length == 10 && this.members[index].memberType == 1){
         if (this.members[index].memberUCID.charAt(3) == 'P' || this.members[index].memberUCID.charAt(3) == 'p') {
-          
+          this.members[index].memberDepartment= "Centre for Postgraduate Studies and Research";
+          this.members[index].memberDepartmentCode = 'cpsr'
         }
         if (this.members[index].memberUCID.charAt(3) == 'R' || this.members[index].memberUCID.charAt(3) == 'r') {
           this.members[index].memberDepartment= "Centre for Pre-University Studies";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'cpus'
         }
         if (this.members[index].memberUCID.charAt(3) == 'B' || this.members[index].memberUCID.charAt(3) == 'b') {
           this.members[index].memberDepartment= "Facuty of Accounting, Finance and Business";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'fafb'
         }
         if (this.members[index].memberUCID.charAt(3) == 'K' || this.members[index].memberUCID.charAt(3) == 'k') {
           this.members[index].memberDepartment= "Facuty of Communication and Creative Industries";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'fcci'
         }
         if (this.members[index].memberUCID.charAt(3) == 'L' || this.members[index].memberUCID.charAt(3) == 'l') {
           this.members[index].memberDepartment= "Facuty of Applied Science";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'foas'
         }
         if (this.members[index].memberUCID.charAt(3) == 'V' || this.members[index].memberUCID.charAt(3) == 'v') {
           this.members[index].memberDepartment= "Facuty of Build Envionment";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'fobe'
         }
         if (this.members[index].memberUCID.charAt(3) == 'M' || this.members[index].memberUCID.charAt(3) == 'm') {
           this.members[index].memberDepartment= "Facuty of Computing and Information Technology";
@@ -481,19 +482,17 @@ export default {
         }
         if (this.members[index].memberUCID.charAt(3) == 'G' || this.members[index].memberUCID.charAt(3) == 'g') {
           this.members[index].memberDepartment= "Facuty of Engineering and Technology";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'foet'
         }
         if (this.members[index].memberUCID.charAt(3) == 'J' || this.members[index].memberUCID.charAt(3) == 'j') {
           this.members[index].memberDepartment= "Facuty of Social Science and Humanities";
-          this.members[index].memberDepartmentCode = 'focs'
+          this.members[index].memberDepartmentCode = 'fssh'
         }
 
       }else if(this.members[index].memberUCID.length < 4 && this.members[index].memberType == 1){
         this.members[index].memberDepartment= "";
         this.members[index].memberDepartmentCode = ''
       }
-
-      
 
       if(this.members[index].memberType == 3){
         this.members[index].memberDepartment= "Alumni";
@@ -508,26 +507,7 @@ export default {
 
     if (this.members[index].memberUCID.length == 10) {
 
-      // seperator
-
-      switch (this.members[index].memberUCID.charAt(3)) {
-        case 'P':
-        case 'p':
-          this.members[index].memberDepartment= "Centre for Postgraduate Studies and Research";
-          this.members[index].memberDepartmentCode = 'cpsr'
-          break;
-        case 'M':
-        case 'm':
-          this.members[index].memberDepartment= "Faculty of Computing and Information Technology";
-          this.members[index].memberDepartmentCode = 'focs'
-          break;
-
-        default:
-          this.members[index].memberDepartment= "";
-          this.members[index].memberDepartmentCode = ''
-          break;
-      }
-      // seperator 
+      console.log('test12')
       // faculty = this.members[index].memberUCID.charAt(4)
       // level = this.members[index].memberUCID.charAt(5)
 

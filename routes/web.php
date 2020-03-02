@@ -87,6 +87,7 @@ Route::prefix('registration')->group(function(){
         Route::get('updateComplete', 'PRTempAccountController@updateComplete')->name('pr.temp.update.complete');
     });
    
+
 Route::prefix('isparkmentor')->group(function(){   
         Route::get('', 'MentorRegistrationController@showRegistrationForm')->name('mentor.registration.show');
         Route::post('', 'MentorRegistrationController@saveRegistration')->name('mentor.registration.submit');
@@ -111,6 +112,8 @@ Route::prefix('isparkmentor')->group(function(){
  */
 Route::prefix('get')->group(function(){
         Route::get('/programmes/{faculty}/{level}', 'ProjectMemberController@getProgramme');
+
+
         Route::get('/department', function(){
             return CenterFaculty::all()->pluck('name');
         })->name('get.department');
@@ -166,6 +169,12 @@ Route::post('/investorRegis/rec/manager/post','IRManagerRecommendationController
 
 Route::get('/investorRegis/app/director/{appID}','IRDirectorApprovalController@showApprovalForm')->name('investor.approval.get');
 Route::post('/investorRegis/app/director/post','IRDirectorApprovalController@saveApproval')->name('investor.approval.post');
+
+
+Route::prefix('isparkproject')->group(function(){   
+    Route::get('/fileList/{id}','ProjectUploadLogController@viewFile')->name('project.file.list');
+    Route::post('/fileUpload/{id}', 'ProjectUploadLogController@storeUpload')->name('project.file.upload');
+});
 
 
 Route::get('test33', 'EmailController@test');
